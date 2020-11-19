@@ -1,0 +1,21 @@
+<?php
+    if (!$this->isCaptchaRequired()) {
+        return;
+    }
+?>
+<div class="human-confirm-form">
+    <form action="<?php echo $this->getActionUrl();?>" method="post" id="<?php echo $this->getFormId();?>">
+        <div class="content">
+            <ul class="form-list">
+                <?php echo $this->renderCaptcha();?>
+            </ul>
+        </div>
+        <div class="buttons-set">
+            <button type="submit" class="button" title="<?php echo $this->__('I\'m a human') ?>">
+                <span>
+                    <span><?php echo $this->__('I\'m a human') ?></span>
+                </span>
+            </button>
+        </div>
+    </form>
+</div>

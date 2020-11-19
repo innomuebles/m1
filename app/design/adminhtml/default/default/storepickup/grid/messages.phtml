@@ -1,0 +1,43 @@
+<?php echo $this->getTabsHtml(); ?>
+<script type="text/javascript">
+    //<![CDATA[
+    function load_messages_funcs(){
+<?php if (($block = $this->getLayout()->getBlock('storepickup.grid.messages')) && ($_gridJsObject = $block->getJsObjectName())): ?>
+            var selectedMessages=$H();
+            function registerSelectedMessages(grid, element, checked){
+                if(checked){
+                    selectedMessages.set(element.value, element.value);
+                }
+                else{
+                    selectedMessages.unset(element.value);
+                }
+                grid.reloadParams = {'selected_messages[]':selectedMessages.keys()};
+            }    
+            function selectedMessageRowClick(grid, event){
+                var trElement = Event.findElement(event, 'tr');
+                var isInput   = Event.element(event).tagName == 'INPUT';
+                if(trElement){
+                    var checkbox = Element.getElementsBySelector(trElement, 'input');
+                    if(checkbox[0]){
+                        var checked = isInput ? checkbox[0].checked : !checkbox[0].checked;
+<?php echo $_gridJsObject ?>.setCheckboxChecked(checkbox[0], checked);
+                    }
+                }
+            }
+
+            var tabIndex = 1000;
+            function selectedMessagesRowInit(grid, row){
+                var checkbox = $(row).getElementsByClassName('checkbox')[0];
+            }
+
+
+<?php echo $_gridJsObject ?>.rowClickCallback 		= selectedMessageRowClick;
+<?php echo $_gridJsObject ?>.initRowCallback 		= selectedMessagesRowInit;
+<?php echo $_gridJsObject ?>.checkboxCheckCallback	= registerSelectedMessages;
+<?php echo $_gridJsObject ?>.rows.each(function(row){selectedMessagesRowInit(<?php echo $_gridJsObject ?>, row)});
+
+<?php endif; ?>
+    }
+    load_messages_funcs();
+    //]]>
+</script><strong></strong>

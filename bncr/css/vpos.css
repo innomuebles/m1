@@ -1,0 +1,27 @@
+/* CSS VPOS */
+
+body {
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+}
+
+
+#myModal .modal-body{
+    max-height: 550px;
+    overflow: visible;
+	margin:0 auto;
+	margin-top:-45px;
+
+}
+.modal { width: 625px; height:515px;}
+.iframevpos {
+	
+	padding: 0px;
+	clear: both;
+	width: 595px;
+	height: 525px;
+	margin: 0px;
+	border: 0px;
+	padding-top:0;
+	margin-top:0;
+}

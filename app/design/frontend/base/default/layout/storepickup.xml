@@ -1,0 +1,76 @@
+<?xml version="1.0"?> 
+<layout version="0.1.0">
+    <default>
+		<reference name="head">
+			<action method="addCss"  ><stylesheet>storepickup/css/storepickup.css</stylesheet></action>
+             <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params></params></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar.js</name></action>
+            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name></action>
+            <block type="core/html_calendar" name="head.calendar" as="calendar" template="page/js/calendar.phtml"></block>
+            <action method="addItem" ifconfig="storepickup/setting/jquery"><type>js</type><name>mst/storepickup/jquery-1.7.2.min.js</name></action>
+	        <action method="addItem" ifconfig="storepickup/setting/jquery"><type>js</type><name>mst/storepickup/noconflict.js</name></action>      
+		</reference>
+		<reference name="top.links">
+            <action method="addLink" ifconfig="storepickup/setting/header_links" translate="label title" module="customer"><label>Our Stores</label><url>storepickup/</url><title>Our Stores</title><position>40</position></action>
+        </reference> 
+	</default>
+    <sales_order_view>
+    <reference name="sales.order.info">
+    <action method='setTemplate'><template>storepickup/sales/order/info.phtml</template></action>
+    </reference>
+    </sales_order_view>	
+	<storepickup_index_index>
+		<reference name="head">
+			<action method="setTitle"><title>Store Pickup</title></action>
+		</reference>
+		<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+		<reference name="content">
+			<block type="storepickup/storepickup" name="storepickup" template="storepickup/storepickup.phtml" />
+		</reference>
+	</storepickup_index_index>
+	 <checkout_onepage_shippingmethod> 
+        <reference name="root">
+            <action method="setTemplate"> 
+                <template>storepickup/shipping_method/available.phtml</template> 
+            </action> 
+        </reference> 
+    </checkout_onepage_shippingmethod> 
+	<storepickup_index_view>
+		<reference name="head">
+			<action method="setTitle"><title>Store Pickup</title></action>
+		</reference>
+		<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+		<reference name="content">
+			<block type="storepickup/storepickup" name="storepickup_view" template="storepickup/view.phtml" />
+		</reference>
+	</storepickup_index_view>
+	
+	<checkout_onepage_index>
+		<reference name="before_body_end">
+            <block type="storepickup/storepickup" name="mst.popup.map" template="storepickup/popup-maps.phtml"  />
+		</reference>
+    </checkout_onepage_index>
+	
+	<onestepcheckout_index_index>
+		<reference name="before_body_end">
+            <block type="storepickup/storepickup" name="mst.popup.map" template="storepickup/popup-maps.phtml"  />
+			<block type="storepickup/storepickup" name="mst.othercheckout" template="storepickup/storefooter.phtml"  />
+		</reference>
+	</onestepcheckout_index_index>
+	     <onepagecheckout_index_index>
+     	<reference name="before_body_end">
+            <block type="storepickup/storepickup" name="mst.popup.map" template="storepickup/popup-maps.phtml"  />
+			<block type="storepickup/storepickup" name="mst.othercheckout" template="storepickup/storefooter.phtml"  />
+		</reference>
+     </onepagecheckout_index_index>
+	<sales_order_print>
+		<reference name="content">
+            <block type="sales/order_print" name="sales.order.print" template="storepickup/sales/order/print.phtml"></block>
+		</reference>
+	</sales_order_print>
+	
+</layout> 

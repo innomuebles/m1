@@ -1,0 +1,118 @@
+<style type="text/css">
+.store-image { float: left; margin-right: 5px; margin-top: 3px; }
+</style>
+<?php $_elementId = $this->getElement()->getHtmlId() ?>
+<?php $_elementClass = $this->getElement()->getClass() ?>
+<?php $_elementName = $this->getElement()->getName() ?>
+
+<tr>
+	<td class="label"><?php echo $this->getElement()->getLabel() ?></td>
+	<td colspan="10" class="grid" width="470">
+		<table cellspacing="0" class="data border" id="<?php echo $_elementName ?>_table">
+			<col/>			
+			<thead>
+				<tr class="headings">
+					<th><?php echo $this->__('Image') ?></th>				
+					<th><?php echo $this->__('Base Image') ?></th>								                                
+					<th><?php echo $this->__('Action') ?></th>					
+				</tr>
+			</thead>
+			<tbody id="<?php echo $_elementId ?>_container"></tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+					<td colspan="4" class="a-right"><?php echo $this->getAddButtonHtml() ?></td>
+				</tr>
+			</tfoot>
+		</table>
+<script type="text/javascript">
+//<![CDATA[
+var <?php echo $_elementName ?>ItemTemplate = '<tr>'
+	+ '<input type="hidden" name="<?php echo $_elementName ?>[{{index}}][id]" id="<?php echo $_elementName ?>_row_{{index}}_id" />'
+        + '<input type="hidden" name="<?php echo $_elementName ?>[{{index}}][options]" id="<?php echo $_elementName ?>_row_{{index}}_options" />'        
+	+ '<td>'
+                 +'<input class="<?php echo $_elementClass ?>" type="file" name="<?php echo $_elementName ?>{{index}}" id="<?php echo $_elementName ?>_row_{{index}}_name"/>'
+                +'<div class="store-image">'
+                    + '<a href="" id="<?php echo $_elementName ?>_row_{{index}}_link" target="_blank" ><img id="<?php echo $_elementName ?>_row_{{index}}_image" src="" width="23px" height="23px" style="margin-left:5px;"></a>'
+                +'</div>'
+	+ '</td>'
+		 
+        + '<td>'
+             + '<input id="<?php echo $_elementName ?>_row_{{index}}_radio" type="radio" name="img_base">'
+        + '</td>'            
+	+ '<td class="last">'
+		+ '<input type="hidden" name="<?php echo $_elementName ?>[{{index}}][delete]" class="delete" value="0" id="<?php echo $_elementName ?>_row_{{index}}_delete" />'
+		+ '<button title="<?php echo $this->__("Delete") ?>" type="button" class="scalable delete icon-btn" id="<?php echo $_elementName ?>_row_{{index}}_delete_button" onclick="return <?php echo $_elementName ?>Control.deleteItem(event);">'
+			+ '<span><?php echo $this->__("Delete") ?></span>'
+		+ '</button>'
+	+ '</td>'
+	+ '</tr>';
+var <?php echo $_elementName ?>Control = {
+	template: new Template(<?php echo $_elementName; ?>ItemTemplate, new RegExp('(^|.|\\r|\\n)({{\\s*(\\w+)\\s*}})', "")),
+	itemsCount: 1,
+	addItem: function(){
+		var data = {
+			id: 0,			
+                        status: 0,                      
+			index: this.itemsCount,
+                        del: 0,
+                        image:'',
+                        store:'',
+						image_type:'',
+		};
+		if (arguments.length >= 7) {	
+                        data.id = arguments[0];                        
+			data.status = arguments[1];                        
+                        data.index = arguments[2];
+                        data.del = arguments[3];                        
+                        data.image = arguments[4];                        
+                        data.store = arguments[5];
+						data.image_type = arguments[6];						
+                        this.itemsCount = data.index;
+		}
+		Element.insert($('<?php echo $_elementId ?>_container'),{
+			bottom: this.template.evaluate(data)
+		});
+		$('<?php echo $_elementName ?>_row_' + data.index + '_id').value = data.id;                
+		$('<?php echo $_elementName ?>_row_' + data.index + '_radio').value = data.index; 
+                $('<?php echo $_elementName ?>_row_' + data.index + '_options').value = data.index;
+                $('<?php echo $_elementName ?>_row_' + data.index + '_delete').value = data.del;
+                if ($('<?php echo $_elementName ?>_row_' + data.index + '_delete').value == 2 && data.image != ''){
+                      src_image =   "<?php echo Mage::helper('storepickup')->getImageUrlJS();?>"+'/'+data.store+'/'+data.image;
+                     $('<?php echo $_elementName ?>_row_' + data.index + '_image').show();
+	             $('<?php echo $_elementName ?>_row_' + data.index + '_image').setAttribute('src',src_image);
+	             $('<?php echo $_elementName ?>_row_' + data.index + '_link').setAttribute('href',src_image);
+                }
+                else{
+                    $('<?php echo $_elementName ?>_row_' + data.index + '_image').setAttribute('src','');
+                    $('<?php echo $_elementName ?>_row_' + data.index + '_image').hide();
+                }
+                if (data.status == 1){
+                    $('<?php echo $_elementName ?>_row_' + data.index + '_radio').checked = true;
+                }
+                this.itemsCount++;
+	},
+	disableElement: function(el){
+		el.disabled = true;
+		el.addClassName('disabled');
+	},
+	deleteItem: function(event){
+		var tr = Event.findElement(event, 'tr');
+		if (tr){
+			Element.select(tr, '.delete').each(function(elem){elem.value='1'});
+			Element.select(tr, ['input','select']).each(function(elem){elem.hide()});
+			Element.hide(tr);
+			Element.addClassName(tr, 'no-display template');
+		}
+		return false;
+	}
+};
+<?php 
+$image = $this->getValues($this->getRequest()->getParam('id'));
+
+foreach ($image as $_item):?>
+<?php echo $_elementName ?>Control.addItem('<?php echo $_item->getData('image_id')?>','<?php echo $_item->getData('status')?>', '<?php echo $_item->getData('options')?>', '<?php echo $_item->getData('image_delete')?>', '<?php echo $_item->getData('name')?>', '<?php echo $_item->getData('storepickup_id')?>', '<?php echo $_item->getData('image_type')?>');
+<?php endforeach;?>
+</script>
+	</td>
+</tr>

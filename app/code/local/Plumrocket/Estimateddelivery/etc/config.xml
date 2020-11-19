@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Plumrocket_Estimateddelivery>
+			<version>1.6.2</version>
+			<wiki>http://wiki.plumrocket.com/wiki/Magento_Estimated_Delivery_Date_Extension_v1.x</wiki>
+		</Plumrocket_Estimateddelivery>
+	</modules>
+	
+	<frontend>
+		<layout>
+			<updates>
+				<estimateddelivery>
+					<file>estimateddelivery.xml</file>
+				</estimateddelivery>
+			</updates>
+		</layout>
+		<translate>
+            <modules>
+                <Plumrocket_Estimateddelivery>
+                    <files>
+                        <default>Plumrocket_Estimateddelivery.csv</default>
+                    </files>
+                </Plumrocket_Estimateddelivery>
+            </modules>
+        </translate>
+	</frontend>
+	
+	<global>
+		<helpers>
+			<estimateddelivery>
+				<class>Plumrocket_Estimateddelivery_Helper</class>
+			</estimateddelivery>
+		</helpers>
+		<blocks>
+			<estimateddelivery>
+				<class>Plumrocket_Estimateddelivery_Block</class>
+			</estimateddelivery>
+
+			<adminhtml>
+				<rewrite>
+					<catalog_product_edit_tabs>Plumrocket_Estimateddelivery_Block_Adminhtml_Tabs</catalog_product_edit_tabs>
+				</rewrite>
+			</adminhtml>
+		</blocks>
+		
+		<models>
+			<estimateddelivery>
+				<class>Plumrocket_Estimateddelivery_Model</class>
+				<resourceModel>estimateddelivery_mysql4</resourceModel>
+			</estimateddelivery>
+			<estimateddelivery_mysql4>
+				<class>Plumrocket_Estimateddelivery_Model_Mysql4</class>
+				<entities>
+				</entities>
+			</estimateddelivery_mysql4>
+
+			<catalog>
+				<rewrite>
+					<convert_parser_product>Plumrocket_Estimateddelivery_Model_Override_Catalog_Convert_Parser_Product</convert_parser_product>
+				</rewrite>
+			</catalog>
+		</models>
+		
+		<resources>
+			<estimateddelivery_setup>
+				<setup>
+					<module>Plumrocket_Estimateddelivery</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</estimateddelivery_setup>
+			<estimateddelivery_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</estimateddelivery_write>
+			<estimateddelivery_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</estimateddelivery_read>
+		</resources>
+
+		<events>
+			<adminhtml_catalog_category_tabs>
+				<observers>
+					<estimateddelivery>
+						<class>estimateddelivery/observer</class>
+						<method>loadCategoryTabs</method>
+					</estimateddelivery>
+				</observers>
+			</adminhtml_catalog_category_tabs>
+			<!--
+			<adminhtml_catalog_product_edit_prepare_form>
+				<observers>
+					<estimateddelivery>
+						<class>estimateddelivery/observer</class>
+						<method>prepareProductForm</method>
+					</estimateddelivery>
+				</observers>
+			</adminhtml_catalog_product_edit_prepare_form>
+			-->
+			<core_block_abstract_to_html_before>
+                <observers>
+                    <estimateddelivery_observer>
+                        <type>singleton</type>
+                        <class>estimateddelivery/observer</class>
+                        <method>coreBlockAbstractToHtmlBefore</method>
+                    </estimateddelivery_observer>
+                </observers>
+            </core_block_abstract_to_html_before>
+		</events>
+	</global>
+
+	<adminhtml>
+		<layout>
+			<updates>
+				<estimateddelivery>
+					<file>estimateddelivery.xml</file>
+				</estimateddelivery>
+			</updates>
+		</layout>
+		<translate>
+            <modules>
+                <Plumrocket_Estimateddelivery>
+                    <files>
+                        <default>Plumrocket_Estimateddelivery.csv</default>
+                    </files>
+                </Plumrocket_Estimateddelivery>
+            </modules>
+        </translate>
+	</adminhtml>
+	
+	<estimateddelivery>
+		<holidays>
+		<!-- 
+		# Holiday format: <dayX>mm-dd</dayX>
+		# Check Plumrocket online documentation at http://wiki.plumrocket.net/ for more info
+		-->
+		</holidays>
+	</estimateddelivery>
+	
+	<default>
+		<estimateddelivery>
+			<general>
+				<enable>0</enable>
+				<position>product</position>
+			</general>
+			<delivery>
+				<default_days>10</default_days>
+				<default_text_enable>0</default_text_enable>
+				<default_text>Estimated delivery date for this product is not available</default_text>
+				<time_after_enable>0</time_after_enable>
+				<time_after>00,00</time_after>
+				<weekend>0,6</weekend>
+			</delivery>
+			<shipping>
+				<default_days>10</default_days>
+				<default_text_enable>0</default_text_enable>
+				<default_text>Estimated shipping date for this product is not available</default_text>
+				<time_after_enable>0</time_after_enable>
+				<time_after>00,00</time_after>
+				<weekend>0,6</weekend>
+			</shipping>
+		</estimateddelivery>
+	</default>
+</config> 

@@ -1,0 +1,86 @@
+.sm-serachbox-pro{
+  .form-search{
+    border:1px solid #ddd;
+    display:inline-block;
+    position:relative;
+
+    .cat-wrapper{
+      width:116px;
+      float:left;
+      position:relative;
+      background:url(../../../images/search-pro-dropdown.png) no-repeat right center;
+
+      span{
+        display: inline-block;
+        line-height: 30px;
+        overflow: hidden;
+        padding-left: 10px;
+        white-space: nowrap;
+        width: 87px !important;
+        position:relative;
+        top:2px;
+      }
+
+      select{
+        position:absolute;
+        top:0px;
+        left:0px;
+        width:100%;
+        height:35px;
+        opacity: 0;
+      }
+    }
+
+    .input-search{
+      position:relative;
+      margin-left:116px;
+
+      #search{
+        border:none;
+        background:none;
+        height: 24px;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-top: 5px;
+        width:235px;
+        padding-right:35px;
+
+        &:focus{
+          border:none;
+          background:none;
+        }
+      }
+    }
+
+    .button-search-pro{
+      font-size: 16px;
+      position: absolute;
+      right: 9px;
+      top: 9px;
+
+      &:hover{
+        text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  .sm-searchbox-popular{
+    .sm-searchbox-popular-title{
+      float:left;
+    }
+
+    .sm-searchbox-keyword{
+      float:left;
+
+      .sm-searchbox-keyword-list{
+        li{
+          display:inline-block;
+        }
+      }
+    }
+  }
+
+  .sm-searchbox-advanced{
+    clear:both;
+  }
+}

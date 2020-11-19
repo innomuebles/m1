@@ -1,0 +1,35 @@
+#row_estimateddelivery_delivery_holidays .grid table.data colgroup col[width="0"],
+#row_estimateddelivery_shipping_holidays .grid table.data colgroup col[width="0"] {
+	display: none;
+}
+
+.dateperiod-hide {
+	display: none;
+}
+
+.dateperiod-type select,
+.dateperiod-type input.input-text {
+	width: 150px !important;
+}
+
+.dateperiod-recurring-date select {
+	width: 110px !important;
+	display: inline-block;
+}
+
+table tr[id^="row_estimateddelivery"] table.data {
+	width: 545px;
+	min-width: 545px;
+}
+
+table tr[id^="row_estimateddelivery"] table.data tr th:first-child {
+	width: 151px;
+}
+
+table tr[id^="row_estimateddelivery"] table.data tr th:last-child {
+	width: 81px;
+}
+
+#estimateddelivery_general_position {
+	min-width: 300px;
+}

@@ -1,0 +1,6 @@
+<widgets>
+    <tm_bot_human_confirm_form module="tm_botprotection" translate="name description" type="tm_botprotection/human_confirm_form">
+        <name>Bot Protection: Human Confirm Form</name>
+        <description>Form with CAPTCHA for visitor to confirm it is human</description>
+    </tm_bot_human_confirm_form>
+</widgets>

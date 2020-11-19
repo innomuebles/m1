@@ -1,0 +1,210 @@
+<?php
+/*------------------------------------------------------------------------
+ # SM Super Categories - Version 1.0.0
+ # Copyright (c) 2014 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/
+global $var_yttheme;
+$image_base = Mage::getModel('catalog/product')->getSmallImageUrl();
+$helper = Mage::helper('supercategories/data');
+$cat_info = $this->getListCategoriesFilter();
+//var_dump($cat_info);
+
+///////////////////////
+
+$catID = $cat_info[0]['id'];
+
+$category=Mage::getModel('catalog/category')->load($catID);
+$img_cat = $category->getThumbnail();
+if($img_cat){
+	$url_img = Mage::getBaseUrl('media').'catalog/category/'.$img_cat;
+}
+
+//////////////////////
+
+$list = $this->getListCriterionFilter();
+if (!empty($list)) {
+	//$sub_cat = Mage::getStoreConfig('supercategories_cfg/source_options/sub_cat_limit');
+	$sub_cat = $this->_getConfig('sub_cat_limit');
+
+	$staticID = $this->_getConfig('static_id');
+
+	$autoplay = $this->_getConfig('play');
+	
+	$stop = $this->_getConfig('stop');
+	if($stop=="1"){
+		$stop_hover='true';
+	}else{
+		$stop_hover='false';
+	}
+
+	$autoplay = $this->_getConfig('play');
+	
+	if($autoplay=="1"){
+		$play='true';
+	}else{
+		$play='false';
+	}
+
+	$interval = (int)$this->_getConfig('delay');
+	$interval = $play ? $interval : 0;
+	$speed =(int)$this->_getConfig('duration');
+	$start = (int) $this->_getConfig('start');
+	$start = ( $start <= 0 || $start > count($list) ) ? 0 : $start - 1;
+	$step = (int)$this->_getConfig('scroll',1);
+	$step = $step <= 0 ? 1: $step;
+	
+	$btn = $this->_getConfig('next_prev_display');
+
+	$nb1 = $this->_getConfig('nbi_column1', 4);
+	$nb2 = $this->_getConfig('nbi_column2', 3);
+	$nb3 = $this->_getConfig('nbi_column3', 2);
+	$nb4 = $this->_getConfig('nbi_column4', 2);
+
+	$import_str = "";
+	$jsHelper = Mage::helper('core/js');
+	// jquery has not added yet
+	if (!defined('MAGENTECH_JQUERY') && (int)$this->_getConfig('include_jquery')) {
+		// if module allowed jquery.
+		$import_str .= $jsHelper->includeSkinScript('sm/supercategories/js/jquery-1.8.2.min.js');
+		$import_str .= $jsHelper->includeSkinScript('sm/supercategories/js/jquery-noconflict.js');
+		$import_str .= $jsHelper->includeSkinScript('sm/supercategories/js/slider.js');
+		define('MAGENTECH_JQUERY', 1);
+	}
+	echo $import_str;
+	$instance = rand() . time();
+	$tag_id = 'sm_listing_tabs_' . rand() . time();
+	$uniqued ='cat_slider_'.rand().time();
+	$class_ltabs = 'ltabs00-' . $this->_getConfig('nbi_column1', 4) . ' ltabs01-' . $this->_getConfig('nbi_column1', 3) . ' ltabs02-' . $this->_getConfig('nbi_column2', 3) . ' ltabs03-' . $this->_getConfig('nbi-column3', 2) . ' ltabs04-' . $this->_getConfig('nbi-column4', 1)
+	?>
+	<?php $class_respl = 'preset01-' . $this->_getConfig('nb_column1', 4) . ' preset02-' . $this->_getConfig('nb_column2', 3) . ' preset03-' . $this->_getConfig('nb_column3', 2) . ' preset04-' . $this->_getConfig('nb_column4', 2) . ' preset05-' . $this->_getConfig('nb_column5', 1); ?>
+
+	<div id="<?php echo $tag_id; ?>" class="super-category-block first-load">
+		
+		<div class="block-title-default">
+			<h2>
+				<a title="<?php echo $cat_info[0]['name'];?>" href="<?php echo $cat_info[0]['link'];?>">
+					<span>
+						<?php if($img_cat){?>
+							<img src="<?php echo $url_img?>" />
+						<?php } ?>
+						<?php echo $cat_info[0]['name'];?>
+					</span>
+				</a>
+			</h2>
+		</div>
+
+		<?php
+		$pretext = $this->_getConfig('pretext');
+		if (!empty($pretext)) {
+			?>
+			<div class="pre-text"><?php echo $this->_getConfig('pretext'); ?></div>
+		<?php } ?>
+
+
+		<?php 
+			$cms_id = Mage::getSingleton('cms/page')->getIdentifier();
+		?>
+		<div class="border-cat-inner">
+			<div class="row">
+			<div class="col-lg-3 col-md-3 col-sm-12">
+				<div class="sub-super-category">
+					<div class="sub-wrapper-cat">
+					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId($staticID)->toHtml(); ?>
+					<?php foreach( $cat_info as $cat){
+						$cat_child = $cat['child'];
+					?>
+						<?php if( $cat_child != null ){?>
+							<ul class="cat-list">
+							
+								<?php foreach( $cat_child as $item ){ ?>
+									<li class="item">
+										<a href="<?php echo $item['link'];?>" <?php echo $helper->parseTarget($this->_getConfig('product_links_target','_self')) ?>>
+											<?php echo $helper->truncate($item['name'], $this->_getConfig('cat_title_maxlength', 25)); ?>
+										</a>														
+									</li>
+								<?php }?>
+							</ul>					
+						<?php }?>
+					<?php }?>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-9 col-md-9 col-sm-12">
+				<div class="super-cat-wrapper super-cat-wrapper-h5">
+					<?php if($btn == 1){ ?>
+					<div class="customNavigation custom-nav-default">
+						<a title="Previous" class="button-default prev-cat prev-super-cat-<?php echo $cat_info[0]['id'];?> icon-angle-left"></a>
+						<a title="Next" class="button-default next-cat next-super-cat-<?php echo $cat_info[0]['id'];?> icon-angle-right"></a>
+					</div>
+					<?php } ?>
+
+						<div class="overflow-owl-slider">
+							<div class="border-cat">
+							<div class="rw-margin">
+								<div class="ltabs-items-container slider-cat-<?php echo $cat_info[0]['id'];?>"><!--Begin Items-->
+									<?php foreach ($list as $items) {
+										$child_items = isset($items->child) ? $items->child : '';
+										$cls_device = $class_ltabs;
+										$cls_animate = $this->_getConfig('effect');
+										$cls = (isset($items->sel) && $items->sel == "sel") ? ' ltabs-items-selected ltabs-items-loaded' : '';
+										$cls .= ($items->id == "*") ? ' items-category-all' : ' items-category-' . $items->id;
+										?>
+											<?php include('default_items.php'); ?>
+			
+									<?php } ?>
+								</div>
+							</div>
+							
+							<script>
+								jQuery(document).ready(function($) {
+									var owl_cat_<?php echo $cat_info[0]['id'];?> = $(".slider-cat-<?php echo $cat_info[0]['id'];?>");
+									owl_cat_<?php echo $cat_info[0]['id'];?>.owlCarousel({
+										itemsCustom : [
+										[0, <?php echo $nb4;?>],
+										[480, <?php echo $nb3;?>],
+										[768, <?php echo $nb2;?>],
+										[992, <?php echo $nb2;?>],
+										[1200, <?php echo $nb1;?>]
+										], 
+										navigation : false, // Show next and prev buttons
+										slideSpeed : <?php echo $speed;?>,
+										stopOnHover: <?php echo $stop_hover;?>,
+										paginationSpeed : 400,
+										autoPlay:<?php echo $play;?>,
+										pagination: false,
+									});	 
+											
+									$(".next-super-cat-<?php echo $cat_info[0]['id'];?>").click(function(){
+										owl_cat_<?php echo $cat_info[0]['id'];?>.trigger('owl.next');
+									})
+									$(".prev-super-cat-<?php echo $cat_info[0]['id'];?>").click(function(){
+										owl_cat_<?php echo $cat_info[0]['id'];?>.trigger('owl.prev');
+									})
+								});	
+							</script>
+							</div>
+						</div>
+					
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+			</div>
+		</div>
+		<?php
+		$posttext = $this->_getConfig('posttext');
+		if (!empty($posttext)) {
+			?>
+			<div class="post-text"><?php echo $this->_getConfig('posttext'); ?></div>
+		<?php } ?>
+	</div>
+<?php
+} else {
+	echo 'Has no item to show!';
+} ?>
+
+
+

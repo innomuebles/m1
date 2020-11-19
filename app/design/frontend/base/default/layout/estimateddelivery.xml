@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addCss" ifconfig="estimateddelivery/general/enable"><stylesheet>css/plumrocket/estimateddelivery/estimateddelivery.css</stylesheet></action>
+        </reference>
+        <reference name="alert.urls">
+            <block type="estimateddelivery/product" name="estimateddelivery_product" as="estimateddelivery" template="estimateddelivery/product.phtml" />
+        </reference>
+    </catalog_product_view>
+    
+    <catalog_category_default>
+        <reference name="head">
+            <action method="addCss" ifconfig="estimateddelivery/general/enable"><stylesheet>css/plumrocket/estimateddelivery/estimateddelivery.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="estimateddelivery/product" name="estimateddelivery_category" as="estimateddelivery" template="estimateddelivery/category.phtml" />
+        </reference>
+	</catalog_category_default>
+	
+	<catalog_category_layered>
+        <reference name="head">
+            <action method="addCss" ifconfig="estimateddelivery/general/enable"><stylesheet>css/plumrocket/estimateddelivery/estimateddelivery.css</stylesheet></action>
+        </reference>
+        <reference name="content">
+            <block type="estimateddelivery/product" name="estimateddelivery_category" as="estimateddelivery" template="estimateddelivery/category.phtml" />
+        </reference>
+	</catalog_category_layered>
+	
+		
+</layout>

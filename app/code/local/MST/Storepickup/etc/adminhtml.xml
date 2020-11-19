@@ -1,0 +1,41 @@
+<?xml version="1.0"?> 
+<config>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+					<storepickup module="storepickup">
+						<title>Store Pickup</title>
+						<sort_order>71</sort_order>
+						<children>
+							<items module="storepickup">
+								<title>Manage Store</title>
+								<sort_order>0</sort_order>
+								<action>storepickup/adminhtml_storepickup</action>
+							</items>
+							<setting module="storepickup">
+								<title>Settings</title>
+								<sort_order>4</sort_order>
+								<action>adminhtml/system_config/edit/section/storepickup</action>
+							</setting>
+						</children>
+					</storepickup>
+                    <system>
+						<children>
+                            <config>
+                                <children>
+                                    <storepickup>
+                                        <title>Store Pickup</title>
+                                    </storepickup>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

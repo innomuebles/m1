@@ -1,0 +1,96 @@
+<?php
+
+/*
+
+Plumrocket Inc.
+
+NOTICE OF LICENSE
+
+This source file is subject to the End-user License Agreement
+that is available through the world-wide-web at this URL:
+http://wiki.plumrocket.net/wiki/EULA
+If you are unable to obtain it through the world-wide-web, please
+send an email to support@plumrocket.com so we can send you a copy immediately.
+
+@package    Plumrocket_Estimated_Delivery_Date-v1.1.x
+@copyright  Copyright (c) 2013 Plumrocket Inc. (http://www.plumrocket.com)
+@license    http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ 
+*/
+
+if(!Mage::helper('estimateddelivery')->showPosition(Plumrocket_Estimateddelivery_Model_Values_Position::CATEGORY)) {
+	return;
+}
+
+$show = $this->hasDeliveryDate() || $this->hasShippingDate();
+
+if ($show) { ?>
+<div class="estimated-hld-category">
+<?php } ?>
+
+<?php if ($this->hasShippingDate()) { ?>
+<div class="estimated-box estimated-product estimated-shipping">
+	<p class="price-margin">
+		<strong class="estimated-title"><?php echo $this->__('Estimated Shipping Date') ?>:</strong>
+		<!-- <br> -->
+		<span class="estimated-price">
+			<?php
+			if ($this->formatShippingDate() == 'date') { 
+				echo $this->specialFormatDate( $this->getShippingFromTime() );
+				if ($this->getShippingToTime() && ($this->getShippingToTime() != $this->getShippingFromTime())) {
+					 echo ' - ' . $this->specialFormatDate( $this->getShippingToTime() );
+				}
+			} else {
+				echo $this->getShippingText();
+			} 
+			?>
+		</span>
+	</p>
+</div>
+<?php }
+
+if ($this->hasDeliveryDate()) { ?>
+<div class="estimated-box estimated-product estimated-delivery">
+	<p class="price-margin">
+		<strong class="estimated-title"><?php echo $this->__('Estimated Delivery Date') ?>:</strong>
+		<!-- <br> -->
+		<span class="estimated-price">
+			<?php
+			if ($this->formatDeliveryDate() == 'date') { 
+				echo $this->specialFormatDate( $this->getDeliveryFromTime() );
+
+				if ($this->getDeliveryToTime() && ($this->getDeliveryToTime() != $this->getDeliveryFromTime())) {
+					 echo ' - ' . $this->specialFormatDate( $this->getDeliveryToTime() );
+				}
+			} else {
+				echo $this->getDeliveryText();
+			} 
+			?>
+		</span>
+	</p>
+</div>
+<?php } ?>
+
+<?php if ($show) { ?>
+</div>
+
+<script type="text/javascript">
+	/*document.addEventListener('DOMContentLoaded', function() {}, false);*/
+
+	(function(){
+	    var title = document.getElementsByClassName('page-title category-title');
+	    var estimate = document.getElementsByClassName('estimated-hld-category');
+	    if(!title[0] || !estimate[0]) {
+	    	return;
+	    }
+	    title[0].insertAdjacentHTML('afterEnd', estimate[0].outerHTML);
+
+	    estimate = document.getElementsByClassName('estimated-hld-category');
+	    if(estimate[1]) {
+	    	estimate[1].parentNode.removeChild(estimate[1]);
+	    	// estimate[1].style.display = 'none';
+	    }
+	    // (estimate = document.getElementsByClassName('estimated-hld-category')[1]).parentNode.removeChild(estimate);
+	})();
+</script>
+<?php } ?>

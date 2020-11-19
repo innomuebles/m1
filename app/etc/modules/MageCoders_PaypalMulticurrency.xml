@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<config>
+
+    <modules>
+
+        <MageCoders_PaypalMulticurrency>
+
+            <active>true</active>
+
+            <codePool>local</codePool>
+
+			<depends>
+
+                <Mage_Paypal />
+
+            </depends>
+
+        </MageCoders_PaypalMulticurrency>
+
+    </modules>
+
+</config>
+

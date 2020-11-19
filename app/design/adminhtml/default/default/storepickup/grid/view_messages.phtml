@@ -1,0 +1,38 @@
+<?php
+$message = Mage::registry('message_data')->getData();
+?>
+<div style="" id="storepickup_tabs_form_section_content"><div class="entry-edit">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Customer Message') ?></h4>
+    <div class="form-buttons"></div>
+</div>
+    <div id="store_form" class="fieldset ">
+    <div class="hor-scroll">
+                        <table cellspacing="0" class="form-list">
+            <tbody>
+                <tr>
+        <td class="label"><label for="name"><?php echo $this->__('Name'); ?></label></td>
+    <td class="value">
+       <?php echo $message['pickup_contact_name']; ?>        </td>
+    </tr>
+<tr>
+        <td class="label"><label for="email"><?php echo $this->__('Email'); ?></label></td>
+    <td class="value">
+         <?php echo $message['pickup_contact_email']; ?>           </td>
+    </tr>
+<tr>
+        <td class="label"><label for="message"><?php echo $this->__('Message'); ?></label></td>
+    <td class="value">
+        <?php echo $message['pickup_contact_message']; ?>           </td>
+    </tr>
+<tr>
+        <td class="label"><label for="date_sent"><?php echo $this->__('Contact At'); ?>Contact At</label></td>
+    <td class="value">
+        <?php echo $message['pickup_contact_at']; ?>            </td>
+    </tr>
+            </tbody>
+        </table>
+            </div>
+        </div>
+</div>
+</div>

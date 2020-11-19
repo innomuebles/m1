@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<layout>
+	<adminhtml_sales_order_view>
+		<reference name="order_tab_info">
+		  <block type="adminhtml/sales_order_view_info" name="order_info" template="storepickup/sales/order/view/info.phtml"></block>
+		</reference>
+	</adminhtml_sales_order_view>
+ 	<adminhtml_sales_order_invoice_new>
+		<reference name="form">
+		  <block type="adminhtml/sales_order_view_info" name="order_info" template="storepickup/sales/order/view/info.phtml"></block>
+		</reference>
+	</adminhtml_sales_order_invoice_new> 
+	<adminhtml_sales_order_invoice_view>
+		<reference name="form">
+		  <block type="adminhtml/sales_order_view_info" name="order_info" template="storepickup/sales/order/view/info.phtml"></block>
+		</reference>
+	</adminhtml_sales_order_invoice_view>
+	 <adminhtml_sales_order_creditmemo_new>
+		<reference name="form">
+		  <block type="adminhtml/sales_order_view_info" name="order_info" template="storepickup/sales/order/view/info.phtml"></block>
+		</reference>
+	</adminhtml_sales_order_creditmemo_new>
+		<adminhtml_sales_order_creditmemo_view>
+		<reference name="form">
+		  <block type="adminhtml/sales_order_view_info" name="order_info" template="storepickup/sales/order/view/info.phtml"></block>
+		</reference>
+	</adminhtml_sales_order_creditmemo_view>
+</layout>

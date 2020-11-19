@@ -1,0 +1,75 @@
+<?php
+/*------------------------------------------------------------------------
+ # Copyright (c) 2014 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/
+
+global $var_yttheme;  
+// Include cpanel
+if( $var_yttheme->getParam('showCpanel') ) { ?>
+<div id="cpanel_wrapper" style="direction: ltr">
+	<div class="cpanel-head">
+		<span>Theme setting</span>
+		<div class="action cpanel-reset">
+			<a class="btn btn-info reset" href="#" onclick="javascript: onCPResetDefault(TMPL_COOKIE);">Reset</a>
+		</div>		
+	</div>
+
+	<div class="" id="ytcpanel_accordion">
+		<!--Theme-->
+        <div class="accordion-group cpanel-theme-color">
+            <div id="yt_cpanelaccordionfirst" class="accordion-heading">
+                <a class="accordion-toggle">
+					Theme Color
+				</a>
+            </div>
+        	<div id="ytitem_1" class="accordion-theme">
+                <div class="accordion-inner clearfix">
+					<div class="color-theme">
+						<a href="<?php echo $this->getUrl('?___store=german&amp;___from_store=default')?>" title="Blue" class="theme-color blue<?php echo ($var_yttheme->getParam('theme_color')=='blue')?' active':'';?>">Blue</a>
+						<a href="<?php echo $this->getUrl('?___store=argentina&amp;___from_store=default')?>" title="Green" class="theme-color green<?php echo ($var_yttheme->getParam('theme_color')=='green')?' active':'';?>">Green</a>
+						<a href="<?php echo $this->getUrl('?___store=cameroon&amp;___from_store=default')?>" title="Red" class="theme-color red<?php echo ($var_yttheme->getParam('theme_color')=='red')?' active':'';?>">Red</a>
+						<a href="<?php echo $this->getUrl('?___store=brazil&amp;___from_store=default')?>" title="Orange" class="theme-color orange<?php echo ($var_yttheme->getParam('theme_color')=='orange')?' active':'';?>">Orange</a>
+						<a href="<?php echo $this->getUrl('?___store=vietnam&amp;___from_store=default')?>" title="Cyan" class="theme-color cyan<?php echo ($var_yttheme->getParam('theme_color')=='cyan')?' active':'';?>">Cyan</a>
+					</div>
+				</div>
+			</div>
+        </div>
+	
+		<!-- Menu -->
+		<div class="accordion-group cpanel-menu">
+			<div class="accordion-heading">
+				<a class="accordion-toggle" data-parent="#ytcpanel_accordion" href="#ytitem_6">
+				Menu style </a>
+			</div>
+			<div id="ytitem_6" class="accordion-menu">
+				<div class="accordion-inner clearfix">
+					<!-- Styles -->
+					<div class="cp-item footer-background-color">
+						<!--span>Styles</span-->
+						<div class="inner">
+							<select onchange="javascript: onCPApply();" name="ytcpanel_menustyle" class="cp_select">
+								<option value="mega" <?php echo ($var_yttheme->getParam('menustyle')=='mega')?' selected="selected"':'';?>>Mega</option>
+								<option value="css" <?php echo ($var_yttheme->getParam('menustyle')=='css')?' selected="selected"':'';?>>Css</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="cpanel_btn" class="normal">
+		<i class="icon-hand-left"></i>
+	</div>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		$('.theme-color').click(function(){
+			$($(this).parent().find('.active')).removeClass('active'); $(this).addClass('active');
+		});
+	});
+    </script>
+<?php } ?>

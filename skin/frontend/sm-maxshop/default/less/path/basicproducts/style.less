@@ -1,0 +1,145 @@
+/*= LEFT PRODUCT GRID COLUMN LEFT =*/
+
+.block-left-products{
+	.block-content{
+		padding:12px 0px!important;
+	}
+  .owl-controls .owl-pagination{
+    padding-top:15px;
+  }
+
+  .bs-item{
+    padding: 0 0 11px 0px;
+    border-bottom:1px solid #ddd;
+    margin-bottom:11px;
+    display:inline-block;
+    width:100%;
+
+    .bs-item-inner{
+      .bs-image{
+        width:80px;
+        float:left;
+
+        a{
+          img{
+            width:100%;
+			.transition_all(.2s);
+			
+			&:hover{
+				opacity:0.8;
+			}
+          }
+        }
+      }
+
+      .bs-content{
+        margin-left:90px;
+
+        .bs-title{
+          a{
+            font-size:116.67%;
+            display:inline-block;
+            padding:5px 0 1px;
+          }
+        }
+
+        .price-box{
+          height:30px;
+          line-height:30px;
+
+          .price{
+            color:#ea3a3c;
+            font-size:133.33%;
+            font-weight:bold;
+          }
+
+          .old-price .price{
+            font-size:100%;
+            color:#999;
+            position:relative;
+            top:1px;
+            font-weight: normal;
+          }
+
+        }
+
+        .r-price-box{
+          line-height: 20px;
+          height: auto;
+          .price{
+            font-size:100%;
+            font-weight:normal;
+          }
+        }
+
+
+        .bs-review{
+          .rating-links,
+          .amount{
+            display:none;
+          }
+        }
+      }
+    }
+
+    &:last-child{
+      margin-bottom:0px;
+      padding-bottom:0px;
+      border:none;
+    }
+  }
+
+}
+
+
+.basic-product-bottom{
+  .basic-product-content{
+    .bs-item{
+      display: inline-block;
+      width: 100%;
+      margin-bottom:20px;
+
+      .bs-image{
+        width:70px;
+        float:left;
+        border:1px solid #ddd;
+
+        img{
+          width:100%;
+
+          &:hover{
+            opacity: 0.8;
+          }
+        }
+      }
+
+      .bs-content{
+        margin-left:85px;
+
+        .bs-title{
+          font-size:116.67%;
+        }
+
+        .regular-price,
+        .special-price{
+          .price{
+            color:#ea3a3c;
+            font-size:133.33%;
+            font-weight: bold;
+          }
+        }
+
+        .old-price{
+          .price{
+            font-size:100%;
+            color:#999;
+            position: relative;
+            top:4px;
+          }
+        }
+      }
+
+
+    }
+  }
+}

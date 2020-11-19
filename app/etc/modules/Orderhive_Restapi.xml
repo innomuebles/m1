@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Orderhive_Restapi>
+			<active>true</active>
+			<codePool>local</codePool>
+		</Orderhive_Restapi>
+	</modules>
+</config>

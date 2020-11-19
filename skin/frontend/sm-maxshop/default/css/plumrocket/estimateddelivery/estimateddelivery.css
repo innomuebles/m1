@@ -1,0 +1,13 @@
+/**
+ * Estimated Delivery css file
+ * 
+ * @category    design
+ * @package     base_default
+ * @author      Clarion Magento Team 
+ */
+/* Estimated Delivery */
+.estimated-hld {clear: both; padding: 16px 0;}
+.estimated-hld .estimated-box {margin-bottom: 10px;}
+.estimated-hld .estimated-box p {margin-bottom: 0px;}
+.estimated-hld-category .estimated-box {display: inline-block;margin-right: 20px;}
+.catalog-product-view  .product-shop .estimated-hld {display:none;}

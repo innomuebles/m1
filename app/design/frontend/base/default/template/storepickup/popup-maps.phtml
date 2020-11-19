@@ -1,0 +1,276 @@
+<?php 
+$collection = $this->getCollection(); 
+$address = $this->getRequest()->getParam('address');
+$state = $this->getRequest()->getParam('state');
+$state_id = $this->getRequest()->getParam('state_id');
+$city = $this->getRequest()->getParam('city');
+$zipcode = $this->getRequest()->getParam('zipcode');
+$country_code = $this->getRequest()->getParam('country');
+$store_id = Mage::app()->getStore()->getStoreId();
+?>
+<div id="popup-overlay"  >
+	<div id="popup-wrapper" >
+		<div class="w_stores" >
+			<div class="store-locator-result" >
+				<?php if ( count($collection) ) { ?>
+				<div class="popup-google-map" ><div id="map" style=" height: 500px;" ></div></div>
+				<div class="clear" ></div>
+				<div class="buttons-set">
+					<div id="selector-save" onclick="javascript:storeApply();" >
+						<span><span><?php echo $this->__('Apply'); ?></span></span>
+					</div>
+					<div id="selector-close" onclick="javascript:storeClose();" >
+						<span><span><?php echo $this->__('Close'); ?></span></span>
+					</div>	
+				</div>
+				<div class="clear" ></div>
+				<div class="list_stores">
+					<?php 
+					if ( count($collection) > 0 ) {
+						foreach ($collection as $store) {
+							$strStoreIds = $store->getStoresId();
+							$arStoreIds = explode(',',$strStoreIds);
+							$arNewStoreIds = array_combine($arStoreIds,$arStoreIds);
+							if(trim($strStoreIds) == '' || array_key_exists(0,$arNewStoreIds))
+							{
+							
+							}
+							elseif(!array_key_exists($store_id,$arNewStoreIds ))
+							continue;
+							$storepickup_id = $store->getStorepickupId();
+							$base_image = Mage::helper('storepickup')->getMainImage( $storepickup_id ); 
+							?>
+							<div id="item-<?php echo $store->getStorepickupId(); ?>" class="item-store <?php if ( $base_image != '' ) { echo 'has-thumnail'; } ?>"  onclick="javascript:storeActive(<?php echo $store->getStorepickupId(); ?>);" >
+								<div class="w-item" >
+								<div class="info-store" >
+								<a  href="javascript: " ><strong><?php echo $store->getTitle(); ?></strong></a>
+								<div class="adress-store"><?php echo $store->getAddress(); ?> , <?php echo $store->getCity(); ?>, <?php echo $store->getStateName(); ?></div>
+								<div class="country-store"><?php echo $store->getCountryName(); ?> , <?php echo $store->getZipcode(); ?></div>
+								<div class="phone-store"><?php echo $store->getPhoneNumber(); ?></div>
+								<div class="detail-store"><a target="_blank" href="<?php echo $this->getUrl('').'storepickup/index/view/id/'.$store->getStorepickupId(); ?>"><?php echo $this->__('View Detail') ?></a></div>
+								</div>
+								<?php if ( $base_image != '' ) { ?>
+								<div class="thumnail-store" >
+								<img width="60px" src="<?php echo $base_image; ?>" alt="" />
+								</div>
+								<?php } ?>
+								<div class="clear" ></div>
+								</div>
+							</div>
+							<?php
+						}
+					}
+					?>	
+				</div>
+				<?php } else { ?>
+				<?php echo $this->__('Store Not Found');  ?>!
+				<?php }  ?>
+				<div class="clear" ></div>
+			</div>
+		</div>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+		<script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>mst/storepickup/storepickup.js" type="text/javascript"></script>
+		<?php if ( count($collection) > 0 ) 
+			{ ?>
+				<script type="text/javascript">
+					var arrayHtml = [];
+					var arrayInfo = [];
+					var storeloactor = new StorepickupIndex( 0, 0, 5, 'map');  
+					var infoWindow = new google.maps.InfoWindow();
+					var htmlInput= '';
+					function storeShow() {
+						$('popup-overlay').setStyle({ display: 'block' });
+						var top = jQuery(document).scrollTop() + 10;
+						$('popup-wrapper').setStyle({ top: top+'px' });
+								
+						storeloactor = new StorepickupIndex( 0, 0, 5, 'map');  
+						infoWindow = new google.maps.InfoWindow();
+						
+						<?php foreach ($collection as $store) { ?>
+							<?php 
+							$strStoreIds = $store->getStoresId();
+							$arStoreIds = explode(',',$strStoreIds);
+							$arNewStoreIds = array_combine($arStoreIds,$arStoreIds);
+							if(trim($strStoreIds) == '' || array_key_exists(0,$arNewStoreIds))
+							{
+							
+							}
+							elseif(!array_key_exists($store_id,$arNewStoreIds ))
+							continue;
+							?>
+							<?php $storepickup_id = $store->getStorepickupId(); ?>
+							//<![CDATA[       
+							var latitude = <?php echo $store->getLatitude(); ?>;
+							var longtitude = <?php echo $store->getLongitude(); ?>;
+							var store_id = <?php echo $store->getStorepickupId(); ?>;
+							//var image = null;
+							var image = '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'storepickup/default/magebay_big_icon.png'; ?>';
+							<?php if ( $store->getMapicon() != '' ) { ?>
+							image = '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$store->getMapicon(); ?>';
+							<?php } ?>
+							var base_image = '<?php echo Mage::helper('storepickup')->getMainImage( $storepickup_id ) ?>';
+							var zoom_level = <?php echo $store->getZoomLevel(); ?>;
+							var html_image = '';
+							if ( base_image != '' ) {
+							html_image = '<div class="base-image" style="width: 60px; float: left; margin: 5px;">'
+										+'<img width="60px" src="'+base_image+'" alt="" />'
+										+'</div>';
+							}
+							var info_store = '<div class="info-store" style="width: 200px; float: left;" >'
+											+'<div class="title-store"><strong><?php echo htmlentities( (string) $store->getTitle(), ENT_QUOTES, 'utf-8', FALSE);//$store->getTitle(); ?></strong></div>'
+											+'<div class="adress-store"><?php echo htmlentities( (string) $store->getAddress(), ENT_QUOTES, 'utf-8', FALSE);//$store->getAddress(); ?> , <?php echo htmlentities( (string) $store->getCity(), ENT_QUOTES, 'utf-8', FALSE);//echo $store->getCity(); ?>, <?php echo htmlentities( (string) $store->getStateName(), ENT_QUOTES, 'utf-8', FALSE);// echo $store->getStateName(); ?></div>'
+											+'<div class="country-store"><?php echo htmlentities( (string) $store->getCountryName(), ENT_QUOTES, 'utf-8', FALSE);//echo $store->getCountryName(); ?> , <?php echo htmlentities( (string) $store->getZipcode(), ENT_QUOTES, 'utf-8', FALSE);// $store->getZipcode(); ?></div>'
+											+'<div class="phone-store"><?php echo $store->getPhoneNumber(); ?></div>'
+											+'<div class="detail-store"><a target="_blank" href="<?php echo $this->getUrl('').'storepickup/index/view/id/'.$store->getStorepickupId(); ?>"><?php echo $this->__('View Detail') ?></a></div>'
+											+'</div>'
+											+ html_image;
+
+							marker_point = new google.maps.LatLng(latitude, longtitude);
+							storeloactor.extendStoreBound(marker_point);
+							
+							//info
+							info_popup = new InfostorePopup(store_id, info_store, zoom_level, marker_point , latitude , longtitude );
+							arrayInfo.push(info_popup);							
+							storeloactor.placeStoreMarker(marker_point, info_store, store_id, image,zoom_level, infoWindow, 0 , latitude , longtitude );
+						<?php } ?>
+						<?php if ( count($collection) == 1 ) { ?>
+						storeloactor.setFitStoreBoundsOne();
+						<?php } else { ?> 
+						storeloactor.setFitStoreBounds();
+						<?php } ?>
+					}
+				</script>
+				<script type="text/javascript">
+					function storeActive(id) 
+					{
+						for(i=0 ; i<arrayInfo.length; i++)
+						{
+							if(arrayInfo[i].store_id == id){
+								infoWindow.setContent(arrayInfo[i].html);
+								infoWindow.setPosition(arrayInfo[i].point);                      
+								storeloactor.map.setCenter(arrayInfo[i].point);            
+								infoWindow.open(storeloactor.map);
+								if(arrayInfo[i].zoom!=0){
+									storeloactor.map.setZoom(arrayInfo[i].zoom);
+									if($('select_store_id') != undefined) {
+										$('select_store_id').value = arrayInfo[i].store_id;
+										$('select_store_lat').value = arrayInfo[i].latitude;
+										$('select_store_lon').value = arrayInfo[i].longtitude;
+										$('detail-selected-store').update( arrayInfo[i].html );
+									}
+								}
+								$$('.item-store').invoke('removeClassName', 'active');
+								$('item-' + id).addClassName('active');
+								break;
+							}
+						}  	   
+					}
+					function storeApply() 
+					{
+						$('popup-overlay').hide();
+						var select_shipping_time = document.getElementById('shipping_time_pickup_id');
+						if(typeof(select_shipping_time) == 'undefined' || select_shipping_time == null)
+						{
+							return false;
+						}
+						var lenght = select_shipping_time.length;
+						for(var i = (lenght - 1);i > 0;i--)
+						{
+							select_shipping_time.options[i] = null;
+						}
+						var store_id = $$('[name="mst_store_id"]')[0].value;
+						var c_day = $$('[name="pickup_shipping_data"]')[0].value;
+						if(c_day.trim() == '')
+						{
+							return false;
+						}
+						var tg_day = c_day.split('/');
+						var thang = parseInt(tg_day[0]) - 1;
+						//check day if < day now
+						var now = new Date();
+						var day_mai = now.getDate();
+						var month_mai = now.getMonth();
+						var year_mai = now.getFullYear();
+						if(year_mai > tg_day[2])
+						{
+						   //alert('Store will be closed on this day');
+							return false; 
+						}
+						if(year_mai == tg_day[2] &&  thang < month_mai)
+						{
+							return false; 
+						}
+						if(year_mai == tg_day[2] && thang == month_mai && day_mai > tg_day[1])
+						{
+							return false;
+						}
+						var thu_day = new Date(tg_day[2], thang, tg_day[1]);
+						var str_thu_day = ''+thu_day;
+						str_thu_day = str_thu_day.trim();
+						var thu = str_thu_day.substr(0,3);
+						var time_open = $$('input[id="'+thu+'_open_'+store_id+'"]')[0].value;
+						var time_close = $$('input[id="'+thu+'_close_'+store_id+'"]')[0].value;
+						if(time_open == '00:00:00' || time_close == '00:00:00')
+						{
+							return false;
+						}
+						var tg_time_open = time_open.split(':');
+						var h_time_open = tg_time_open[0];
+						var m_time_open = tg_time_open[1];
+						var tg_time_close = time_close.split(':');
+						var h_time_close = tg_time_close[0];
+						var m_time_close = tg_time_close[1];
+						if(parseInt(h_time_close) - parseInt(h_time_open) > 0)
+						{
+							if(parseInt(m_time_open) < 30)
+							{
+							   $('shipping_time_pickup_id').insert('<option value="'+h_time_open+':'+m_time_open+'">'+h_time_open+':'+m_time_open+'</option>');
+							   $('shipping_time_pickup_id').insert('<option value="'+h_time_open+':30">'+h_time_open+':30</option>'); 
+							}
+							else
+							{
+								 $('shipping_time_pickup_id').insert('<option value="'+h_time_open+':'+m_time_open+'">'+h_time_open+':'+m_time_open+'</option>');
+							}
+							for(var i = (parseInt(h_time_open) + 1);i < h_time_close;i++)
+							{
+								if(i < 10)
+								{
+								   new_h = '0'+i; 
+								}
+								 else
+								 {
+									new_h = i;
+								 }
+								$('shipping_time_pickup_id').insert('<option value="'+new_h+':00">'+new_h+':00</option>');
+								$('shipping_time_pickup_id').insert('<option value="'+new_h+':30">'+new_h+':30</option>');
+							}
+							if(parseInt(m_time_close) < 30)
+							{
+							   $('shipping_time_pickup_id').insert('<option value="'+h_time_close+':00">'+h_time_close+':00</option>');
+							   if(parseInt(m_time_close) > 0)
+							   $('shipping_time_pickup_id').insert('<option value="'+h_time_close+':'+m_time_close+'">'+h_time_close+':'+m_time_close+'</option>');
+							}
+							else
+							{
+								 $('shipping_time_pickup_id').insert('<option value="'+h_time_close+':00">'+h_time_close+':00</option>');
+								 $('shipping_time_pickup_id').insert('<option value="'+h_time_close+':30">'+h_time_close+':30</option>');
+								 $('shipping_time_pickup_id').insert('<option value="'+h_time_close+':'+m_time_close+'">'+h_time_close+':'+m_time_close+'</option>');
+							}
+						}
+						if(parseInt(h_time_close) - parseInt(h_time_open) == 0 && parseInt(m_time_close) - parseInt(m_time_open) > 0)
+						{
+							 $('shipping_time_pickup_id').insert('<option value="'+h_time_open+':'+m_time_open+'">'+h_time_open+':'+m_time_open+'</option>');
+							 if(parseInt(m_time_close) - parseInt(m_time_open) > 30)
+							 $('shipping_time_pickup_id').insert('<option value="'+h_time_open+':30">'+h_time_open+':30</option>');
+							  $('shipping_time_pickup_id').insert('<option value="'+h_time_close+':'+m_time_close+'">'+h_time_close+':'+m_time_close+'</option>');
+						}
+					}
+					function storeClose() {
+						$('popup-overlay').hide();
+					}
+				</script> 
+		<?php } ?>	
+	</div>
+</div>
+
+

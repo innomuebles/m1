@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+
+    <botprotection_adminhtml_header>
+        <reference name="head">
+            <action method="addJs"><script>tm/validation/ip.js</script></action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/tm/botprotection.js</name>
+            </action>
+        </reference>
+    </botprotection_adminhtml_header>
+
+    <!-- BLACKLIST -->
+    <adminhtml_botprotection_blacklist_index>
+        <reference name="content">
+            <block type="tm_botprotection/adminhtml_blacklist" name="botprotection.blacklist" />
+        </reference>
+    </adminhtml_botprotection_blacklist_index>
+
+    <adminhtml_botprotection_blacklist_new>
+        <update handel="adminhtml_botprotection_blacklist_edit" />
+    </adminhtml_botprotection_blacklist_new>
+
+    <adminhtml_botprotection_blacklist_edit>
+        <update handle="botprotection_adminhtml_header"/>
+        <reference name="content">
+            <block type="tm_botprotection/adminhtml_blacklist_edit" name="blacklist_edit"></block>
+        </reference>
+    </adminhtml_botprotection_blacklist_edit>
+
+    <!-- WHITELIST -->
+    <adminhtml_botprotection_whitelist_index>
+        <reference name="content">
+            <block type="tm_botprotection/adminhtml_whitelist" name="botprotection.whitelist" />
+        </reference>
+    </adminhtml_botprotection_whitelist_index>
+
+    <adminhtml_botprotection_whitelist_new>
+        <update handel="adminhtml_botprotection_whitelist_edit" />
+    </adminhtml_botprotection_whitelist_new>
+
+    <adminhtml_botprotection_whitelist_edit>
+        <update handle="botprotection_adminhtml_header"/>
+        <reference name="content">
+            <block type="tm_botprotection/adminhtml_whitelist_edit" name="whitelist_edit"></block>
+        </reference>
+    </adminhtml_botprotection_whitelist_edit>
+
+    <!-- PENDING LIST -->
+    <adminhtml_botprotection_pending_index>
+        <reference name="content">
+            <block type="tm_botprotection/adminhtml_pending" name="botprotection.pending" />
+        </reference>
+    </adminhtml_botprotection_pending_index>
+
+    <adminhtml_botprotection_pending_new>
+        <update handel="adminhtml_botprotection_pending_edit" />
+    </adminhtml_botprotection_pending_new>
+
+    <adminhtml_botprotection_pending_edit>
+        <update handle="botprotection_adminhtml_header"/>
+        <reference name="content">
+            <block type="tm_botprotection/adminhtml_pending_edit" name="pending_edit"></block>
+        </reference>
+    </adminhtml_botprotection_pending_edit>
+
+</layout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+
+    <adminhtml_catalog_category_edit>
+        <reference name="head">
+        	<action method="addItem"><type>js</type><name>plumrocket/jquery-1.9.1.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/plumrocket/estimateddelivery/category.js</name></action>
+            <action method="setCanLoadTinyMce"><load>1</load></action>
+        </reference>
+    </adminhtml_catalog_category_edit>
+
+    <adminhtml_catalog_product_edit>
+        <reference name="head">
+        	<action method="addItem"><type>js</type><name>plumrocket/jquery-1.9.1.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/plumrocket/estimateddelivery/category.js</name></action>
+            <action method="setCanLoadTinyMce"><load>1</load></action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/plumrocket/estimateddelivery/estimateddelivery.css</stylesheet></action>
+            <action method="addItem"><type>js</type><name>plumrocket/jquery-1.9.1.min.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/plumrocket/estimateddelivery/estimateddelivery.js</name></action>
+        </reference>
+    </adminhtml_system_config_edit>
+
+</layout>

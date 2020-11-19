@@ -1,0 +1,302 @@
+<?php 
+$address = $this->getRequest()->getParam('address');
+$state = $this->getRequest()->getParam('state');
+$state_id = $this->getRequest()->getParam('state_id');
+$city = $this->getRequest()->getParam('city');
+$zipcode = $this->getRequest()->getParam('zipcode');
+$country_code = $this->getRequest()->getParam('country');
+$store_id = Mage::app()->getStore()->getStoreId();
+$store = Mage::registry('storepickup') ;
+$storeAvailiable = false;
+$config = Mage::getStoreConfig('storepickup');
+if($store->getStorepickupId() && $config['setting']['enable'] == 1)
+{	$strStoreIds = $store->getStoresId();
+	$arStoreIds = explode(',',$strStoreIds);
+	$arNewStoreIds = array_combine($arStoreIds,$arStoreIds);
+	if(trim($strStoreIds) == '' || array_key_exists(0,$arNewStoreIds) || array_key_exists($store_id,$arNewStoreIds ))
+	{
+		$storeAvailiable = true;
+	}
+}
+?>
+<div class="w_stores" >
+	<div class="store-locator-result" >	
+		<?php if ($storeAvailiable) { ?>
+		<div class="list_stores_view">
+			<div class="search-stores" >
+				<form action="<?php echo $this->getUrl('storepickup'); ?>" method="post" name="searchstores" >
+					<ul class="form-list">
+						<?php if ( Mage::getStoreConfig('storepickup/manage_search/search_address') ) { ?>
+						<li class="fields">                                               
+							<label for="address"><?php echo $this->__('Your Address') ?></label>
+							<input class="input-text" type="text" value="<?php echo $this->getRequest()->getParam('address'); ?>" name="address" id="address">
+							<div class="clear"></div>
+						</li>
+						<?php } ?>
+						<?php if ( Mage::getStoreConfig('storepickup/manage_search/search_country') ) { ?>
+						<li class="fields">                                               
+							<label for="country"><?php echo $this->__('Country') ?></label>
+							<select name="country" id="country" class="validate-select"> 
+								<option value="nothing" selected><?php echo $this->__('Select Country') ?></option>
+								<?php $arr_countries = Mage::helper('storepickup')->getOptionCountry() ?>
+								<?php if (count($arr_countries)): ?>
+									<?php foreach ($arr_countries as $country): ?>
+										<?php
+										if($this->getRequest()->getParam('country')){
+											$selected = '';
+											if ($country['value'] == $this->getRequest()->getParam('country')) {
+												$selected = 'selected';
+											}
+										}
+										else{
+											$selected = '';
+											if ($country['value'] == $this->getDefaultCountry()) {
+												$selected = 'selected';
+											}
+										}
+										?>
+										<option value="<?php echo $country['value'] ?>" <?php echo $selected; ?>><?php echo $country['label'] ?></option>
+									<?php endforeach; ?>
+								<?php endif; ?>				
+							</select>
+							<div class="clear"></div>
+						</li>
+						<?php } ?>
+						<?php if ( Mage::getStoreConfig('storepickup/manage_search/search_state') ) { ?>
+						<li class="fields">                                               
+							<label for="state"><?php echo $this->__('State/Province') ?></label>
+							<!-- <input class="input-text"type="text" value="<?php echo $this->getRequest()->getParam('state'); ?>" name="state" id="state"> -->
+							<select id="state_id" name="state_id" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+								<option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+							</select>
+							<script type="text/javascript">
+							//<![CDATA[
+								$('state_id').setAttribute('defaultValue',  "<?php echo $this->getRequest()->getParam('state_id'); ?>");
+							//]]>
+							</script>
+							<input type="text" id="state" name="state" value="<?php echo $state ?>" title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+							<script type="text/javascript">
+							//<![CDATA[
+								var countryRegions = <?php echo Mage::helper('directory')->getRegionJson()?>;
+								var newRegionUpdater = new RegionUpdater('country', 'state', 'state_id',countryRegions);
+							//]]>
+							</script>
+							
+							<div class="clear"></div>
+						</li>
+						<?php } ?>
+						<?php if ( Mage::getStoreConfig('storepickup/manage_search/search_city') ) { ?>
+						<li class="fields">                                               
+							<label for="city"><?php echo $this->__('City') ?></label>
+							<input class="input-text" type="text" value="<?php echo $this->getRequest()->getParam('city'); ?>" name="city" id="city">
+							<div class="clear"></div>
+						</li>
+						<?php } ?>
+						<?php if ( Mage::getStoreConfig('storepickup/manage_search/search_zipcode') ) { ?>
+						<li class="fields">                                               
+							<label for="zipcode"><?php echo $this->__('Zip/Postal Code') ?></label>
+							<input class="input-text" type="text" value="<?php echo $this->getRequest()->getParam('zipcode'); ?>" name="zipcode" id="zipcode">
+							<div class="clear"></div>
+						</li>
+						<?php } ?>
+					</ul>
+					<button class="button" title="<?php echo $this->__('Search'); ?>" type="submit"><span><span><?php echo $this->__('Search'); ?></span></span></button>
+				</form>
+			</div>
+			<div class="clear" ></div>
+			<?php if ( $store->getStorepickupId() ) { ?>
+				<div class="store-name"><h3><?php echo $store->getTitle(); ?></h3></div>
+				<ul class="form-list">
+					<li class="fields">                                               
+						<label for="address"><?php echo $this->__('Address'); ?>: </label>
+						<div class="info-text" >
+							<p><?php echo $store->getAddress(); ?> , <?php echo $store->getCity(); ?>, <?php echo $store->getStateName(); ?></p>
+							<p><?php echo $store->getCountryName(); ?> , <?php echo $store->getZipcode(); ?></p>
+						</div>
+						<div class="clear"></div>
+					</li>
+					<li class="fields">
+						<label for="phone"><?php echo $this->__('Phone'); ?>: </label>
+						<div class="info-text" >
+							<?php echo $store->getPhoneNumber(); ?>
+						</div>
+						<div class="clear"></div>
+					</li>
+					<li class="fields">
+						<label for="phone"><?php echo $this->__('Email'); ?>: </label>
+						<div class="info-text" >
+							<a href="mailto:<?php echo $store->getEmail(); ?>"><?php echo $store->getEmail(); ?></a>
+						</div>
+						<div class="clear"></div>
+					</li>
+					<li class="fields">
+						<label for="phone"><?php echo $this->__('Description'); ?>: </label>
+						<div class="info-text" >
+							<?php echo $store->getDescription(); ?>
+						</div>
+						<div class="clear"></div>
+					</li>
+					<li class="fields">   
+						<label for="phone"><?php echo $this->__('Hours'); ?>: </label>
+						<div class="info-text" >
+							<div class="store_info_hours">
+							<p><?php echo $this->__('Mon'); ?> : <?php echo ($store->getPickup_monday_open() != '00:00:00' && $store->getPickup_monday_close() != '00:00:00')  ? date('H:i A',strtotime($store->getPickup_monday_open())). ' - ' .date('H:i A',strtotime($store->getPickup_monday_close())) : $this->__('Closed'); ?></p>
+							<p><?php echo $this->__('Tue'); ?> : <?php echo ($store->getPickup_tuesday_open() != '00:00:00' && $store->getPickup_tuesday_close() != '00:00:00')  ? date('H:i A',strtotime($store->getPickup_tuesday_open())). ' - ' .date('H:i A',strtotime($store->getPickup_tuesday_close())) : $this->__('Closed'); ?></p>
+							<p><?php echo $this->__('Wed'); ?> : <?php echo ($store->getPickup_wednesday_open() != '00:00:00' && $store->getPickup_wednesday_close() != '00:00:00')  ? date('H:i A',strtotime($store->getPickup_wednesday_open())). ' - ' .date('H:i A',strtotime($store->getPickup_wednesday_close())) : $this->__('Closed'); ?></p>
+							<p><?php echo $this->__('Thu'); ?> : <?php echo ($store->getPickup_thursday_open() != '00:00:00' && $store->getPickup_thursday_close() != '00:00:00')  ? date('H:i A',strtotime($store->getPickup_thursday_open())). ' - ' .date('H:i A',strtotime($store->getPickup_thursday_close())) : $this->__('Closed'); ?></p>
+							<p><?php echo $this->__('Fri'); ?> : <?php echo ($store->getPickup_friday_open() != '00:00:00' && $store->getPickup_friday_close() != '00:00:00')  ? date('H:i A',strtotime($store->getPickup_friday_open())). ' - ' .date('H:i A',strtotime($store->getPickup_friday_close())) : $this->__('Closed'); ?></p>
+							<p><?php echo $this->__('Sat'); ?> : <?php echo ($store->getPickup_saturday_open() != '00:00:00' && $store->getPickup_saturday_close() != '00:00:00')  ? date('H:i A',strtotime($store->getPickup_saturday_open())). ' - ' .date('H:i A',strtotime($store->getPickup_saturday_close())) : $this->__('Closed'); ?></p>
+							<p><?php echo $this->__('Sun'); ?> : <?php echo ($store->getPickup_sunday_open() != '00:00:00' && $store->getPickup_sunday_close() != '00:00:00')  ? date('H:i A',strtotime($store->getPickup_sunday_open())). ' - ' .date('H:i A',strtotime($store->getPickup_sunday_close())) : $this->__('Closed'); ?></p>
+							</div>
+						</div>	
+					</li>
+				</ul>
+			<?php } ?>	
+			<div class="clear" ></div>
+		</div>
+		<div class="google_map" ><div id="map" style=" height: 500px;" ></div></div>
+		<?php } else { ?>
+		<?php echo $this->__('Store Not Found');  ?>!
+		<?php }  ?>
+		<div class="clear" ></div>
+	</div>
+    <?php if($storeAvailiable) : ?>
+	<div class="bottom-storepickup" >
+		<div class="left-column" >
+			<div class="list-images" >
+				<?php 
+				$storepickup_id = $this->getRequest()->getParam('id');
+				$base_image = Mage::helper('storepickup')->getMainImage( $storepickup_id );  
+				?>
+				<?php if ( $base_image != '' ) { ?>
+				<div class="main-image" >
+					<a href="<?php echo $base_image; ?>" data-lightbox="example-set"  ><img width="100%"  src="<?php echo $base_image; ?>" /></a>
+				</div>
+				<?php } ?>
+				<div class="clear" ></div>
+				<ul class="more-image" >
+					<?php 
+					$list_img = Mage::getModel('storepickup/image')->getCollection()->addFieldToFilter('storepickup_id', $storepickup_id);
+					foreach ( $list_img as $img ) {  
+					$url = Mage::getBaseUrl('media') . 'storepickup/images/'. $storepickup_id . '/' . $img->getName();
+					?>
+					<li>
+					<a href="<?php echo $url; ?>" data-lightbox="example-set" ><img width="55px" width="55px" alt="<?php echo $img->getName(); ?>" src="<?php echo $url; ?>" /></a>
+					</li>
+					<?php
+					}
+					?>
+				</ul>
+			</div>
+			<?php if ( Mage::getStoreConfig('storepickup/setting/jquery') )  { ?>
+			<?php /*<script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS) ?>mst/lightbox/js/jquery-1.10.2.min.js"></script> */ ?>
+			<script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS) ?>mst/lightbox/js/mst-jquery-noconflict.js"></script>
+			<?php } ?>
+			<script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS) ?>mst/lightbox/js/lightbox-2.6.min.js"></script>
+			<link rel="stylesheet" href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS) ?>mst/lightbox/css/lightbox.css" media="screen"/>
+		</div>
+		<div class="right-column" >
+			<div class="storepickup-contact">
+				<fieldset>
+				  <h2><?php echo $this->__('Contact'); ?></h2>
+					  <form action="<?php echo $this->getUrl(); ?>storepickup/index/savecontact/" method="post"  id="pickup_contact" name="pickup_contact" >
+						  <input name="pickup_id" id="pickup_id" type="hidden" readonly="true" value="<?php echo $store->getStorepickupId(); ?>" />
+						  <label for="contact_name"><?php echo $this->__('Your Name'); ?>(*)</label>
+						  <input type="text" name="contact_name" id="contact_name" value="" class="input-text required-entry" />
+						   <label for="contact_email"><?php echo $this->__('Email'); ?>(*)</label>
+						  <input type="text" name="contact_email" id="contact_email" class="input-text required-entry validate-email" />
+						  <label for="contact_content"><?php echo $this->__('Content'); ?>(*)</label>
+						  <textarea  name="contact_content" id="contact_content" cols="5" rows="3" class="required-entry"></textarea>
+						  <div class="button_submit">
+						  <button type="submit" title="submit" class="button" ><span><span><?php echo $this->__('Submit'); ?></span></span></button>
+						  </div>
+					  </form>
+				 </fieldset>
+			</div>
+		</div>
+	</div>
+    <?php endif; ?>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_JS); ?>mst/storepickup/storepickup.js" type="text/javascript"></script>
+	<?php if ($storeAvailiable) { ?>
+		<?php $storepickup_id = $store->getStorepickupId(); ?>	
+		<script type="text/javascript">
+		//<![CDATA[
+		//validate form contact
+		var pickup_contact = new VarienForm('pickup_contact', true);
+		var defaultLatlng = new google.maps.LatLng(-34.397, 150.644);
+		var myOptions = {
+			zoom: 8,
+			center: defaultLatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
+		map = new google.maps.Map(document.getElementById("map"),myOptions);
+		var bounds = new google.maps.LatLngBounds();
+		var setLat  = <?php echo $store->getLatitude(); ?>;
+		var setLon  = <?php echo $store->getLongitude(); ?>; 
+		var storeId = <?php echo $store->getStorepickupId(); ?>;  
+		var zoom_level = <?php echo $store->getZoomLevel(); ?>;
+		var base_image = '<?php echo Mage::helper('storepickup')->getMainImage( $storepickup_id ) ?>';
+		var html_image = '';
+		if ( base_image != '' ) {
+		html_image = '<div class="base-image" style="width: 60px; float: left; margin: 5px;">'
+					+'<img width="60px" src="'+base_image+'" alt="" />'
+					+'</div>';
+		}
+		var info_store = '<div class="info-store" style="width: 200px; float: left;" >'
+						+'<div class="title-store"><strong><?php echo $store->getTitle(); ?></strong></div>'
+						+'<div class="adress-store"><?php echo $store->getAddress(); ?> , <?php echo $store->getCity(); ?>, <?php echo $store->getStateName(); ?></div>'
+						+'<div class="country-store"><?php echo $store->getCountryName(); ?> , <?php echo $store->getZipcode(); ?></div>'
+						+'<div class="phone-store"><?php echo $store->getPhoneNumber(); ?></div>'
+						+'<div class="detail-store"><a href="#"><?php echo $this->__('View Detail'); ?></a></div>'
+						+'</div>'
+						+html_image;					
+		marker_point = new google.maps.LatLng(setLat, setLon);
+		bounds.extend(marker_point);
+		var infoWindow = new google.maps.InfoWindow();
+		placeStoreMarker(setLat,setLon,info_store,storeId,zoom_level);       
+		map.fitBounds(bounds);	
+		map.setCenter(bounds.getCenter());
+		function placeStoreMarker(setLat, setLon,info_store,storeId) {
+			var message = "geotagged geo:lat=" + setLat + " geo:lon=" + setLon + " "; 
+			var messageRoboGEO = setLat + ";" + setLon + ""; 
+			var point = new google.maps.LatLng(setLat, setLon);
+			//var image = null;
+			var image = '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).'storepickup/default/magebay_big_icon.png'; ?>';
+			<?php if ( $store->getMapicon() != '' ) { ?>
+			image = '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$store->getMapicon(); ?>';
+			<?php } ?>
+			if(image){
+				var marker = new google.maps.Marker({
+					position: point,
+					map: map,
+					icon: image
+								
+				});
+			}
+			else {
+				var marker = new google.maps.Marker({
+					position: point,
+					map: map
+				});
+			}
+			google.maps.event.addListener( marker, 'click', function(event) {
+				infoWindow.setContent(info_store);
+				infoWindow.setPosition(point);
+				infoWindow.open(map);
+			});
+			Event.observe(window,'load',function(){
+				
+				infoWindow.setContent(info_store);
+				infoWindow.setPosition(point);
+				infoWindow.open(map);
+				if(zoom_level!=0){
+					map.setZoom(zoom_level);
+				}
+			});
+			   
+		}
+	//]]>
+	</script> 
+<?php } ?>	

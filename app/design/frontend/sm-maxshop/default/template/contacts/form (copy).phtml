@@ -1,0 +1,233 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+
+<div class="row box-2-contact">
+    <div class="your-store-title">
+    Nuestra Tiendas</div>
+    <div id="stores-list-div">
+<table border="0" id="stores">
+        <tbody><tr>
+            <td valign="top" class="stores-view">
+            <table id="stores-inner">
+                <tbody><tr><td class="stores-name"><a href="https://www.innomuebles.com/storelocator/index/view/id/1/"><?php echo html_entity_decode('San Jos&eacute',ENT_QUOTES); ?> , San Pedro</a></td></tr>
+               <tr>
+                    <td>
+                        <!-- country -->
+                                                Costa Rica<br>
+                                           </td>
+               </tr>
+               <tr>
+                    <td>
+                        <!-- State -->
+                                                <?php echo html_entity_decode('San Jos&eacute',ENT_QUOTES); ?><br>
+                                           </td>
+               </tr>
+               <tr>
+                    <td>
+                        <!-- City -->
+                                                Montes de Oca<br>
+                                           </td>
+               </tr>
+               <tr>
+                    <td>
+                     <!-- Store Address -->
+                                           Diagonal a Mas X Menos La Granja, San Pedro<br>
+                                         </td>
+               </tr>
+                <tr>
+                    <td>
+                        <!-- Zip Code -->
+                                           </td>
+               </tr>
+               <tr>
+                    <td>
+                        <!-- Phone -->
+                                                Phone:2224-2028<br>
+                                           </td>
+               </tr>
+               <tr><td>&nbsp;</td></tr>
+               <tr>
+                    <td>
+                        <table>
+                            <tbody><tr>
+                                <td>
+                                    <button onclick="setLocation('https://www.innomuebles.com/storelocator/index/view/id/1/');" class="button" title="Ver los detalles" type="button">
+                                        <span>
+                                            <span>
+                                            Ver los detalles                                            </span>
+                                        </span>
+                                    </button>
+                                </td>
+                                
+                                <td width="1px">&nbsp;</td>                                
+                            </tr>
+                        </tbody></table>
+                        
+                   </td>
+               </tr>
+         </tbody></table>
+         </td>
+                              <td valign="top" class="stores-view">
+            <table id="stores-inner">
+                <tbody><tr><td class="stores-name"><a href="https://www.innomuebles.com/storelocator/index/view/id/2/">Heredia, Santo Domingo</a></td></tr>
+               <tr>
+                    <td>
+                        <!-- country -->
+                                                Costa Rica<br>
+                                           </td>
+               </tr>
+               <tr>
+                    <td>
+                        <!-- State -->
+                                                Heredia<br>
+                                           </td>
+               </tr>
+               <tr>
+                    <td>
+                        <!-- City -->
+                                                Santo Domingo<br>
+                                           </td>
+               </tr>
+               <tr>
+                    <td>
+                     <!-- Store Address -->
+                                           500 mts sur Mas X Menos San Pablo de Heredia<br>
+                                         </td>
+               </tr>
+                <tr>
+                    <td>
+                        <!-- Zip Code -->
+                                           </td>
+               </tr>
+               <tr>
+                    <td>
+                        <!-- Phone -->
+                                                Phone:2249-9370<br>
+                                           </td>
+               </tr>
+               <tr><td>&nbsp;</td></tr>
+               <tr>
+                    <td>
+                        <table>
+                            <tbody><tr>
+                                <td>
+                                    <button onclick="setLocation('https://www.innomuebles.com/storelocator/index/view/id/2/');" class="button" title="Ver los detalles" type="button">
+                                        <span>
+                                            <span>
+                                            Ver los detalles                                            </span>
+                                        </span>
+                                    </button>
+                                </td>
+                                
+                                <td width="1px">&nbsp;</td>                              
+                            </tr>
+                        </tbody></table>
+                        
+                   </td>
+               </tr>
+         </tbody></table>
+         </td>
+                </tr><tr> 
+                                          </tr> 
+     <tr>
+         <td align="right">&nbsp;</td>
+    </tr>
+</tbody></table>
+</div>
+    
+    
+</div>
+
+<div class="row box-1-contact">
+	<div class="contact-map-wrap col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('google-map')->toHtml() ?>
+	</div>
+	<form class="contact-form col-lg-6 col-md-6 col-sm-6 col-xs-12" action="<?php echo Mage::getUrl(); ?>contacts/index/post/" id="contactForm" method="post">
+		<div class="form-wrapper">
+			<ul class="form-list">
+				<li class="fields">
+					<div class="field">
+						<div class="input-box">
+							<input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Title') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Your name...') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Your name...') ?>';" value="<?php echo ($this->helper('contacts')->getUserName())?$this->htmlEscape($this->helper('contacts')->getUserName()):Mage::helper('contacts')->__('Name'); ?>" class="input-text required-entry" type="text" />
+						</div>
+					</div>
+					<div class="field">
+						<div class="input-box">
+							<input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Title') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Your email...') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Your email...') ?>';" value="<?php echo ($this->helper('contacts')->getUserEmail())?$this->htmlEscape($this->helper('contacts')->getUserEmail()):Mage::helper('contacts')->__('Email'); ?>" class="input-text required-entry validate-email" type="text" />
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="input-box field">
+						<input name="subject" id="subject" title="<?php echo Mage::helper('contacts')->__('Title') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Subject') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Subject') ?>';" value="<?php echo ($this->helper('contacts')->getUserEmail())?$this->htmlEscape($this->helper('contacts')->getUserEmail()):Mage::helper('contacts')->__('Subject'); ?>" class="input-text" type="text" />  
+					</div>
+				</li>
+				<li class="wide">
+					<div class="input-box">
+						<textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Title') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Comment...') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Comment...') ?>';" value="<?php echo ($this->helper('contacts')->getUserEmail())?$this->htmlEscape($this->helper('contacts')->getUserEmail()):Mage::helper('contacts')->__('Comment'); ?>" cols="10" rows="7"><?php echo Mage::helper('contacts')->__('Comment') ?></textarea>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="buttons-set">
+			<input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
+			<button type="submit" title="<?php echo Mage::helper('contacts')->__('Send Email') ?>" class="button"><span><span><?php echo Mage::helper('contacts')->__('Send Email') ?></span></span></button>
+		</div>
+	</form>
+	<div style="clear:both; padding:15px 0px;">&nbsp;</div>
+	
+	<?php //echo $this->getChildHtml('info-store'); ?>
+	
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    var contactForm = new VarienForm('contactForm', false);
+//]]>
+</script>
+<style>
+    .row.box-2-contact .your-store-title {
+        text-align: center;
+        font-size: 24px;
+        border-bottom: 1px solid #DDDDDD;
+        margin-bottom: 13px;
+    }
+    .row.box-2-contact #stores {
+        margin: auto;
+    }
+    .row.box-2-contact {
+        border: 1px solid #DDDDDD;
+        width: 100% !important;
+        margin: auto;
+        margin-bottom: 21px;
+    }
+    table#stores-inner {
+        margin-left: 20px;
+        margin-right: 20px;
+        font-size: 15px;
+    }
+</style>

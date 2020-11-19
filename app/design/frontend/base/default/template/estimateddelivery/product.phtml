@@ -1,0 +1,81 @@
+<?php
+
+/*
+
+Plumrocket Inc.
+
+NOTICE OF LICENSE
+
+This source file is subject to the End-user License Agreement
+that is available through the world-wide-web at this URL:
+http://wiki.plumrocket.net/wiki/EULA
+If you are unable to obtain it through the world-wide-web, please
+send an email to support@plumrocket.com so we can send you a copy immediately.
+
+@package    Plumrocket_Estimated_Delivery_Date-v1.1.x
+@copyright  Copyright (c) 2013 Plumrocket Inc. (http://www.plumrocket.com)
+@license    http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ 
+*/
+
+$product = $this->getProduct();
+if (!$product->isSaleable()) {
+	return;
+}
+
+if(!Mage::helper('estimateddelivery')->showPosition(Plumrocket_Estimateddelivery_Model_Values_Position::PRODUCT)) {
+	return;
+}
+
+$show = $this->hasDeliveryDate() || $this->hasShippingDate(); 
+
+if ($show) { ?>
+<div class="estimated-hld">
+<?php } ?>
+
+<?php if ($this->hasShippingDate()) { ?>
+<div class="estimated-box estimated-product estimated-shipping">
+	<p class="price-margin">
+		<strong class="estimated-title"><?php echo $this->__('Estimated Shipping Date') ?></strong>
+		<br>
+		<span class="estimated-price">
+			<?php
+			if ($this->formatShippingDate() == 'date') { 
+				echo $this->specialFormatDate( $this->getShippingFromTime() );
+				if ($this->getShippingToTime() && ($this->getShippingToTime() != $this->getShippingFromTime())) {
+					 echo ' - ' . $this->specialFormatDate( $this->getShippingToTime() );
+				}
+			} else {
+				echo $this->getShippingText();
+			} 
+			?>
+		</span>
+	</p>
+</div>
+<?php }
+
+if ($this->hasDeliveryDate()) { ?>
+<div class="estimated-box estimated-product estimated-delivery">
+	<p class="price-margin">
+		<strong class="estimated-title"><?php echo $this->__('Estimated Delivery Date') ?></strong>
+		<br>
+		<span class="estimated-price">
+			<?php
+			if ($this->formatDeliveryDate() == 'date') { 
+				echo $this->specialFormatDate( $this->getDeliveryFromTime() );
+
+				if ($this->getDeliveryToTime() && ($this->getDeliveryToTime() != $this->getDeliveryFromTime())) {
+					 echo ' - ' . $this->specialFormatDate( $this->getDeliveryToTime() );
+				}
+			} else {
+				echo $this->getDeliveryText();
+			} 
+			?>
+		</span>
+	</p>
+</div>
+<?php } ?>
+
+<?php if ($show) { ?>
+</div>
+<?php } ?>

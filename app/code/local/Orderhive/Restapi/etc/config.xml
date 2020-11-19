@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<modules>
+		<Orderhive_Restapi>
+			<version>0.1.0</version>
+		</Orderhive_Restapi>
+	</modules>
+	<global>
+		<models>
+			<restapi>
+				<class>Orderhive_Restapi_Model</class>
+			</restapi>
+		</models>
+		<helpers>
+            <restapi>
+                <class>Orderhive_Restapi_Helper</class>
+            </restapi>
+        </helpers>
+	</global>
+</config>

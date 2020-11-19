@@ -1,0 +1,63 @@
+<?php  $pickups = $this->getCollection(); ?> 
+<?php if(count($pickups)) : ?>
+	  <div class="form-list" id="shipping_form_storepickup_storepickup" style="display:none;">
+		<div class="select-store" >
+		<div id="store-show" onclick="javascript:storeShow();" ><span><span><?php echo $this->__('Select Store'); ?></span></span></div>
+		<div class="clear" ></div>
+		<div id="result-store" style="display: none;" >
+		select_store_id : <input type="text" name="mst_store_id" value="" id="select_store_id" /><br>
+		select_store_lat : <input type="text" value="" id="select_store_lat" /><br>
+		select_store_lon : <input type="text" value="" id="select_store_lon" /><br>
+		</div>
+		</div>
+		<div id="detail-selected-store" ></div>
+		<div class="clear" ></div>
+		<?php if(Mage::getStoreConfig('storepickup/setting/pickup_time') == 1) : ?>
+		<div class="date_shipping">
+			<div class="date-time" >
+			<label for="dob"><?php echo Mage::helper('storepickup')->__('Shipping Date') ?></label>
+			<div class="input-box">
+				<input name="pickup_shipping_data" id="_pickup_shipping_data" value="" type="text">
+				<img title="Select date" id="_pickup_shipping_data_trig"  src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'adminhtml/default/default/images/grid-cal.gif'; ?>"  class="v-middle"/>
+			</div>
+			</div>
+			<div class="date-time" >
+			<label for="dob"><?php echo Mage::helper('storepickup')->__('Shipping Time') ?></label>
+			<select class="required-entry validate-select" name="shipping_time_pickup" id="shipping_time_pickup_id">
+			<option selected="" value=""><?php echo $this->__('Select Time'); ?></option>    
+			</select>
+			</div>
+		</div>  
+		<?php endif; ?> 
+	  </div>
+	  <!--hien thi list store + date month -->
+	  <?php foreach($pickups as $myP) : ?>
+	   <input type="hidden" id="Mon_open_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_monday_open(); ?>" />
+	   <input type="hidden" id="Mon_close_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_monday_close(); ?>" />
+	   <input type="hidden" id="Tue_open_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_tuesday_open(); ?>" />
+	   <input type="hidden" id="Tue_close_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_tuesday_close(); ?>" />
+	   <input type="hidden" id="Wed_open_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_wednesday_open(); ?>" />
+	   <input type="hidden" id="Wed_close_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_wednesday_close(); ?>" />
+	   <input type="hidden" id="Thu_open_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_thursday_open(); ?>" />
+	   <input type="hidden" id="Thu_close_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_thursday_close(); ?>" />
+	   <input type="hidden" id="Fri_open_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_friday_open(); ?>" />
+	   <input type="hidden" id="Fri_close_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_friday_close(); ?>" />
+	   <input type="hidden" id="Sat_open_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_saturday_open(); ?>" />
+	   <input type="hidden" id="Sat_close_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_saturday_close(); ?>" />
+	   <input type="hidden" id="Sun_open_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_sunday_open(); ?>" />
+	   <input type="hidden" id="Sun_close_<?php echo $myP->getId(); ?>" value="<?php echo $myP->getPickup_sunday_close(); ?>" />
+	  <?php endforeach; ?>
+	  <?php if(Mage::getStoreConfig('storepickup/setting/pickup_time') == 1) : ?>
+	<script type="text/javascript">
+	//<![CDATA[
+	 Calendar.setup({
+			inputField : '_pickup_shipping_data',
+			ifFormat : '%m/%e/%Y',
+			button : '_pickup_shipping_data_trig',
+			align : 'Bl',
+			singleClick : true
+		});
+	//]]>
+	</script>
+	<?php endif; ?>
+<?php endif; ?>

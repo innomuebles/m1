@@ -1,0 +1,96 @@
+.clear { clear: both; } 
+.w_stores {  }
+.search-stores { float: left; overflow: auto; margin: 0 0 20px; }
+.list_stores { float: left;height: 500px;width: 37%; overflow: auto; }
+.list_stores .item-store { padding: 15px 10px; max-width: 310px; }
+.list_stores .item-store.has-thumnail {  }
+.list_stores .item-store.has-thumnail .info-store {float: left;width: 73%;}
+.list_stores .item-store.has-thumnail .thumnail-store {float: right;width: 25%;}
+.list_stores .item-store.has-thumnail .thumnail-store img { width:100%;}
+.info-store { text-align: left; }
+#scrollbar1 .overview .content .store a {color: #999999;font-family: Tahoma;font-size: 13px;font-weight: bold;line-height: 25px;}
+.google_map { width: 60%; float: left; margin: 0 0 0 3%; }
+
+.store-locator-result  { border-bottom: 1px solid #CCCCCC; border-top: 1px solid #CCCCCC; padding: 10px 0; margin: 0 0 20px }
+
+.search-stores {  }
+.search-stores .fields  {float: left;width: 100%;}
+.search-stores .fields label  { float: left;width: 30%;}
+.search-stores .fields input , .search-stores .fields select  { float: left;width: 67%;}
+
+.list_stores_view .fields  {float: left;width: 100%;}
+.list_stores_view .fields label  { float: left;width: 30%;}
+.list_stores_view .fields .info-text  { float: left;width: 70%;}
+.list_stores_view .fields .info-text p { margin: 0; }
+
+
+.list_stores_view { float: left; width: 37%;  }
+.list-images { margin: 0; }
+.more-image { margin: 10px 0 0; }
+.more-image li { float: left; margin: 0 7px 0 0; }
+
+#popup-overlay { bottom: 0;display: none;left: 0;position: absolute;right: 0;top: 0;z-index: 999999;}
+#popup-wrapper { background-color: #FFFFFF;box-shadow: 0 0 135px #444444;color: #444444 !important;font: 12px/1.55 Arial,Helvetica,sans-serif !important;height: auto;left: 50%;margin-left: -475px;max-width: 950px;position: absolute;top: 20px;width: 100%;}
+.popup-google-map {  }
+#popup-wrapper .list_stores { width: 98%; max-height: 500px; height: auto; margin: 10px 1%; overflow: auto; }
+#popup-wrapper .list_stores .item-store {float: left;margin: 10px 1%;min-height: 145px;padding: 0;text-align: left;width: 23%;}
+#popup-wrapper .list_stores .item-store .w-item  { padding: 5px;}
+
+#popup-wrapper .buttons-set { margin-top: 15px;  border-bottom: 1px solid #E4E4E4;border-top: 0 none;padding-bottom: 10px; }
+#selector-save {cursor: pointer; background: none repeat scroll 0 0 #EFEFEF;border: 1px solid #DDDDDD;display: block;float: right;font-weight: bold;padding: 5px 5px 3px;text-align: center;text-transform: uppercase;transition: all 0.3s ease 0s;width: 135px; margin: 0 15px 0 0; }
+#selector-close { cursor: pointer; background: none repeat scroll 0 0 #EFEFEF;border: 1px solid #DDDDDD;display: block;float: left;font-weight: bold;padding: 5px 5px 3px;text-align: center;text-transform: uppercase;transition: all 0.3s ease 0s;width: 100px; margin: 0 0 0 15px; }
+#store-show {background: none repeat scroll 0 0 #EFEFEF;border: 1px solid #DDDDDD;cursor: pointer;display: block;float: left;font-size: 11px;font-weight: bold;margin: 5px 0;padding: 2px;text-align: center;text-transform: uppercase;transition: all 0.3s ease 0s;width: 100px;}
+#selector-save:hover , #selector-close:hover , #store-show:hover { cursor: pointer; background: #ddd; border-color: #ccc; }
+/*styel list store button*/
+
+.list-store-footer { float: left;height: 500px;overflow: auto; width: 100%; }
+.list-store-footer td  { border-bottom: 1px solid #CCCCCC; cursor: pointer; padding: 10px 0; }
+.list_stores tr.active td { background: none repeat scroll 0 0 #F1F2F7; }
+
+.list-store-footer  p { margin: 0; }
+.store_info_base {
+    float: left;
+}
+.store_info_hours {
+    float: left;
+}
+
+.store_info_description {
+    float: left;
+	max-width: 200px;
+}
+/*style form contact*/
+.storepickup-contact {float: left;margin: 0 2%;width: 96%;}
+.storepickup-contact label {
+    width: 100%;
+    float: left;
+}
+.storepickup-contact input.input-text {
+    float: left;
+	 width: 100%;
+}
+.storepickup-contact textarea {  width: 100%; }
+.storepickup-contact div.button_submit {
+    float: left;
+    width: 100%;
+	margin: 15px 0 0 0;
+}
+.storepickup-contact div.button_submit input {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+.storepickup-contact div.button_submit input:hover {
+    color: green;
+}
+.date_shipping .date-time  { margin: 3px 0; }
+.date_shipping .date-time label { display: block; float: none; }
+
+.bottom-storepickup .left-column {float: left;width: 37%;}
+.bottom-storepickup .right-column {float: left;width: 60%; margin: 0 0 0 3%;}
+
+
+
+
+
+

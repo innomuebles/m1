@@ -1,0 +1,116 @@
+<div class="header-v3">
+	<div class="yt-header-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-5 sl-header-text">
+					<?php echo $this->getChildHtml('header-slider');?>
+				</div>
+				
+				<div class="col-lg-6 col-md-7 top-links-action">
+					<?php echo $this->getChildHtml('currency'); ?>
+					<?php echo $this->getChildHtml('store_language') ?>
+					<div class="block-action-header top-link-account checkout-link">
+						<?php echo $this->getChildHtml('topLinks');?>
+					</div>
+					<div class="block-action-header top-link-account my-account-link">
+						<ul>
+							<li>
+								<a class="account-toplink dropdown-ict" title="<?php echo $this->__('My Account')?>" href="<?php echo $this->getUrl('customer/account')?>"><?php echo $this->__('My Account')?></a>
+								<?php echo $this->getChildHtml('account_links'); ?>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="block-action-header top-link-account login-link">
+						<ul>
+							<?php if(!$this->helper('customer')->isLoggedIn()){?>
+							<li>
+								<a class="login-btn" data-toggle="modal" data-target="#modal-login" title="<?php echo $this->__('Login')?>"><?php echo $this->__('Login')?></a>
+                                <?php echo $this->getChildHtml('customer_form_mini_login'); ?>
+							</li>
+							<?php } else{?>
+							<li>
+								<a class="logout-btn" href="<?php echo $this->getUrl('customer/account/logout')?>" title="<?php echo $this->__('Logout');?>"><?php echo $this->__('Logout');?></a>
+                            </li>
+							<?php } ?>
+						</ul>
+					</div>
+					
+					<div class="action-mobile">
+
+						<div class="block-action-header top-link-account my-account-link account-mobile-btn">
+							<ul>
+								<li>
+									<a title="<?php echo $this->__('My Account')?>" href="<?php echo $this->getUrl('customer/account')?>">&nbsp;</a>
+								</li>
+							</ul>
+							<div class="dropdown-mobile">
+								<?php echo $this->getChildHtml('topLinks');?>
+								<?php echo $this->getChildHtml('account_links'); ?>
+							</div>
+						</div>
+						
+						<div class="block-action-header top-link-account login-link login-mobile-btn">
+							<ul>
+								<?php if(!$this->helper('customer')->isLoggedIn()){?>
+								<li>
+									<a class="login-btn" href="<?php echo $this->getUrl('customer/account/login')?>" title="<?php echo $this->__('Login')?>">&nbsp;</a>
+								</li>
+								<?php } else{?>
+								<li>
+									<a class="logout-btn" href="<?php echo $this->getUrl('customer/account/logout')?>" title="<?php echo $this->__('Logout');?>">&nbsp;</a>
+								</li>
+								<?php } ?>
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="yt-header-middle">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-7 col-md-6 col-sm-5 logo-wrapper">
+					<h1>
+						<a title="<?php echo $this->getLogoAlt() ?>" href="<?php echo $this->getUrl('') ?>">
+							<img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" />
+						</a>
+					</h1>
+				</div>
+				
+				<div class="col-lg-3 col-md-3 col-sm-4 mini-cart-header">
+					<?php echo $this->getChildHtml('mini-cartpro') ?>
+				</div>
+
+				<div class="col-lg-2 col-md-3 col-sm-3 hot-line">
+					<?php echo $this->getChildHtml('hot-line'); ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="yt-header-under">
+		<div class="container">
+			<div class="row yt-header-under-wrap">
+				<div class="yt-main-menu col-md-12">
+					<div id="yt-responsivemenu" class="yt-responsivemenu">
+						<?php echo $this->getChildHtml('mobiMenu'); ?>
+					</div>
+					<div class="yt-menu">
+						<?php if( $var_yttheme->getParam('menustyle') == 'mega' ){
+							echo $this->getChildHtml('megaMenu');
+						} else {
+							echo $this->getChildHtml('topMenu');
+						} ?>
+						
+						<?php echo $this->getChildHtml('searchboxpro'); ?>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

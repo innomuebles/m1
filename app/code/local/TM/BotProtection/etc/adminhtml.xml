@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <templates_master translate="title">
+            <title>Templates Master</title>
+            <sort_order>71</sort_order>
+            <children>
+                <tm_botprotection translate="title" module="tm_botprotection">
+                    <title>Bot Protection</title>
+                    <sort_order>258</sort_order>
+                    <children>
+                        <blacklist translate="title" module="tm_botprotection">
+                            <title>Blacklist</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/botprotection_blacklist</action>
+                        </blacklist>
+                        <pending translate="title" module="tm_botprotection">
+                            <title>Suspicious list</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/botprotection_pending</action>
+                        </pending>
+                        <whitelist translate="title" module="tm_botprotection">
+                            <title>Whitelist</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/botprotection_whitelist</action>
+                        </whitelist>
+                    </children>
+                </tm_botprotection>
+            </children>
+        </templates_master>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <tm_botprotection module="tm_botprotection" translate="title">
+                                        <title>Bot protection</title>
+                                    </tm_botprotection>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <templates_master translate="title">
+                        <title>Templates Master</title>
+                        <sort_order>71</sort_order>
+                        <children>
+                            <tm_botprotection translate="title" module="tm_botprotection">
+                                <title>Bot Protection</title>
+                                <sort_order>500</sort_order>
+                                <children>
+                                    <blacklist translate="title">
+                                        <title>Blacklist</title>
+                                        <sort_order>10</sort_order>
+                                        <children>
+                                            <save translate="title">
+                                                <title>Create/edit item</title>
+                                                <sort_order>10</sort_order>
+                                            </save>
+                                            <delete translate="title">
+                                                <title>Delete item</title>
+                                                <sort_order>20</sort_order>
+                                            </delete>
+                                        </children>
+                                    </blacklist>
+                                    <whitelist translate="title">
+                                        <title>Whitelist</title>
+                                        <sort_order>20</sort_order>
+                                        <children>
+                                            <save translate="title">
+                                                <title>Create/edit item</title>
+                                                <sort_order>10</sort_order>
+                                            </save>
+                                            <delete translate="title">
+                                                <title>Delete item</title>
+                                                <sort_order>20</sort_order>
+                                            </delete>
+                                        </children>
+                                    </whitelist>
+                                    <pending translate="title">
+                                        <title>Pending</title>
+                                        <sort_order>30</sort_order>
+                                        <children>
+                                            <save translate="title">
+                                                <title>Create/edit/move item</title>
+                                                <sort_order>10</sort_order>
+                                            </save>
+                                            <delete translate="title">
+                                                <title>Delete item</title>
+                                                <sort_order>20</sort_order>
+                                            </delete>
+                                        </children>
+                                    </pending>
+                                </children>
+                            </tm_botprotection>
+                        </children>
+                    </templates_master>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

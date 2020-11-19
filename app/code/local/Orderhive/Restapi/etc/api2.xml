@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<config>
+	<api2>
+		<resource_groups>
+			<restapi translate="title" module="orderhive_restapi">
+                <title>Orderhive Restapi</title>
+                <sort_order>10</sort_order>
+            </restapi>
+		</resource_groups>
+		<resources>
+			<productlist translate="title" module="orderhive_restapi">
+				<group>restapi</group>
+                <model>restapi/api2_product</model>
+                <title>Product List</title>
+                <sort_order>20</sort_order>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                    </admin>
+                </privileges>                
+                <attributes translate="entity_id sku name short_description price qty is_in_stock set type weight product_link images created_at parent_id childProducts" module="orderhive_restapi">
+                    <entity_id>Product ID</entity_id>
+                    <sku>Product SKU</sku>
+                    <name>Product Name</name>
+                    <short_description>Product Short Description</short_description>
+                    <price>Product Price</price>
+                    <qty>Product Stock</qty>
+                    <is_in_stock>Stock Availability</is_in_stock>
+                    <set>Product Set</set>
+                    <type>Product Type</type>
+                    <weight>Product Weight</weight>
+                    <product_link>Product Link</product_link>
+                    <images>Product Images</images>
+                    <created_at>Product Created Date</created_at>
+                    <parent_id>Parent Product SKU</parent_id>
+                    <childProducts>Child Products</childProducts>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/productlist/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/productlist</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+			</productlist>
+			<customerlist translate="title" module="orderhive_restapi">
+				<group>restapi</group>
+                <model>restapi/api2_customer</model>
+                <title>Customer List</title>
+                <sort_order>30</sort_order>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                    </admin>
+                </privileges>                
+                <attributes translate="entity_id last_logged_in firstname lastname email website_id created_at group_id confirmation addresses" module="orderhive_restapi">
+                    <entity_id>Customer ID</entity_id>
+                    <last_logged_in>Last Logged In</last_logged_in>
+                    <firstname>First Name</firstname>
+                    <lastname>Last Name</lastname>
+                    <email>Email</email>
+                    <website_id>Associate to Website</website_id>
+                    <created_at>Created Date</created_at>
+                    <group_id>Group</group_id>
+                    <confirmation>Is Confirmed</confirmation>
+                    <addresses>Address List</addresses>
+                </attributes>
+                <routes>
+                    <route_entity>
+                        <route>/customerlist/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/customerlist</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+			</customerlist>
+			<orderlist translate="title" module="orderhive_restapi">
+				<group>restapi</group>
+                <model>restapi/api2_order</model>
+                <title>Order List</title>
+                <sort_order>40</sort_order>
+                <privileges>
+                    <admin>
+                        <retrieve>1</retrieve>
+                        <update>1</update>
+                    </admin>
+                </privileges>                
+                <attributes translate="entity_id increment_id created_at updated_at status shipping_description tracking_number _payment_method base_currency_code store_currency_code order_currency_code store_name remote_ip store_to_order_rate subtotal subtotal_incl_tax discount_amount base_grand_total grand_total shipping_amount shipping_tax_amount shipping_incl_tax tax_amount _tax_name _tax_rate coupon_code base_discount_amount base_subtotal base_shipping_amount base_shipping_tax_amount base_tax_amount total_paid base_total_paid total_refunded base_total_refunded base_subtotal_incl_tax base_total_due total_due shipping_discount_amount base_shipping_discount_amount discount_description customer_balance_amount base_customer_balance_amount _gift_message _order_comments customer_id tax_type shipping_tax_type" module="orderhive_restapi">
+                    <entity_id>Order ID (internal)</entity_id>
+                    <increment_id>Order ID</increment_id>
+                    <created_at>Order Date</created_at>
+                    <updated_at>Order Update Date</updated_at>
+                    <status>Order Status</status>
+                    <shipping_description>Shipping Method</shipping_description>
+                    <tracking_number>Tracking Number</tracking_number>
+                    <_payment_method>Payment Method</_payment_method>
+                    <base_currency_code>Base Currency</base_currency_code>
+                    <store_currency_code>Store Currency</store_currency_code>
+                    <order_currency_code>Order Currency</order_currency_code>
+                    <store_name>Store Name</store_name>
+                    <remote_ip>Placed from IP</remote_ip>
+                    <store_to_order_rate>Store Currency to Order Currency Rate</store_to_order_rate>
+                    <subtotal>Subtotal</subtotal>
+                    <subtotal_incl_tax>Subtotal Including Tax</subtotal_incl_tax>
+                    <discount_amount>Discount</discount_amount>
+                    <base_grand_total>Grand Total to Be Charged</base_grand_total>
+                    <grand_total>Grand Total</grand_total>
+                    <shipping_amount>Shipping Amount</shipping_amount>
+                    <shipping_tax_amount>Shipping Including Tax</shipping_tax_amount>
+                    <shipping_incl_tax>Shipping Tax</shipping_incl_tax>
+                    <tax_amount>Tax Amount</tax_amount>
+                    <_tax_name>Tax Name</_tax_name>
+                    <_tax_rate>Tax Rate</_tax_rate>
+                    <coupon_code>Coupon Code</coupon_code>
+                    <base_discount_amount>Base Discount</base_discount_amount>
+                    <base_subtotal>Base Subtotal</base_subtotal>
+                    <base_shipping_amount>Base Shipping</base_shipping_amount>
+                    <base_shipping_tax_amount>Base Shipping Tax</base_shipping_tax_amount>
+                    <base_tax_amount>Base Tax Amount</base_tax_amount>
+                    <total_paid>Total Paid</total_paid>
+                    <base_total_paid>Base Total Paid</base_total_paid>
+                    <total_refunded>Total Refunded</total_refunded>
+                    <base_total_refunded>Base Total Refunded</base_total_refunded>
+                    <base_subtotal_incl_tax>Base Subtotal Including Tax</base_subtotal_incl_tax>
+                    <base_total_due>Base Total Due</base_total_due>
+                    <total_due>Total Due</total_due>
+                    <shipping_discount_amount>Shipping Discount</shipping_discount_amount>
+                    <base_shipping_discount_amount>Base Shipping Discount</base_shipping_discount_amount>
+                    <discount_description>Discount Description</discount_description>
+                    <customer_balance_amount>Customer Balance</customer_balance_amount>
+                    <base_customer_balance_amount>Base Customer Balance</base_customer_balance_amount>
+                    <_gift_message>Gift Message</_gift_message>
+                    <_order_comments>Order Comments</_order_comments>
+                    <customer_id>Customer ID</customer_id>
+                    <tax_type>Tax Type</tax_type>
+                    <shipping_tax_type>Shipping Tax Type</shipping_tax_type>
+                </attributes>
+                <force_attributes>
+                    <admin>
+                        <payment_method>1</payment_method>
+                        <shipping_address>1</shipping_address>
+                        <billing_address>1</billing_address>
+                        <items>1</items>
+                        <shipments>1</shipments>
+                        <payment>1</payment>
+                        <status_history>1</status_history>
+                        <gift_message_from>1</gift_message_from>
+                        <gift_message_to>1</gift_message_to>
+                        <gift_message_body>1</gift_message_body>
+                        <order_comments>1</order_comments>
+                        <tax_name>1</tax_name>
+                        <tax_rate>1</tax_rate>
+                    </admin>
+                </force_attributes>
+                <routes>
+                    <route_entity>
+                        <route>/orderlist/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                    <route_collection>
+                        <route>/orderlist</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+			</orderlist>
+		</resources>
+	</api2>
+</config>

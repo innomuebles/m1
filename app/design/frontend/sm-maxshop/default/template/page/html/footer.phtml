@@ -1,0 +1,115 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+global $var_yttheme;?>
+<div class="yt-footer-wrap">
+	<div class="footer-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<?php echo $this->getChildHtml('social_info') ?>
+				</div>
+				<div class="col-lg-9 col-md-9">
+					<?php echo $this->getChildHtml('footer-newsletter') ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="footer-middle">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-3  col-sm-6">
+					<div class="content-block-footer">
+						<?php 
+							$srcLOGO = $this->getSkinUrl();
+						?>
+						<h2 class="footer-logo"><img alt="<?php echo Mage::getStoreConfig('design/header/logo_alt');?>" src="<?php echo $srcLOGO;?>images/<?php echo $var_yttheme->getParam('theme_color')?>/logo-footer.png"><span style="display:none;"><?php echo Mage::getStoreConfig('design/header/logo_alt');?></span></h2>
+						<?php echo $this->getChildHtml('des-footer') ?>
+					</div>
+				</div>
+				
+				<div class="col-lg-3 col-md-3  col-sm-6 account-block">
+					<div class="col-footer">
+						<?php echo $this->getChildHtml('account-footer') ?>
+					</div>
+				</div>
+				
+				<div class="col-lg-3 col-md-3  col-sm-6 infomation-block">
+					<div class="col-footer">
+						<?php echo $this->getChildHtml('infomation-footer') ?>
+					</div>
+				</div>
+				
+				<div class="col-lg-3 col-md-3  col-sm-6 contact-block">
+					<div class="col-footer">
+						<?php echo $this->getChildHtml('about-footer') ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="footer-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="copyright-footer">
+						<?php if( $var_yttheme->getParam('custom_copyright') == 1 ){
+							echo $var_yttheme->getParam('copyright');
+						}else{?>
+							<?php echo $this->getCopyright() ?> Designed by <a title="Visit MagenTech.Com!" href="http://www.magentech.com/"><b>MagenTech.Com</b></a>
+						<?php }?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>       
+
+<script type="text/javascript">
+    adroll_adv_id = "74AM6BOTHNDGPM5MGFZM4H";
+    adroll_pix_id = "JJBUWSNIC5AXFHCER5NTPD";
+    /* OPTIONAL: provide email to improve user identification */
+    /* adroll_email = "username@example.com"; */
+    (function () {
+        var _onload = function(){
+            if (document.readyState && !/loaded|complete/.test(document.readyState)){setTimeout(_onload, 10);return}
+            if (!window.__adroll_loaded){__adroll_loaded=true;setTimeout(_onload, 50);return}
+            var scr = document.createElement("script");
+            var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+            scr.setAttribute('async', 'true');
+            scr.type = "text/javascript";
+            scr.src = host + "/j/roundtrip.js";
+            ((document.getElementsByTagName('head') || [null])[0] ||
+                document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+        };
+        if (window.addEventListener) {window.addEventListener('load', _onload, false);}
+        else {window.attachEvent('onload', _onload)}
+    }());
+</script>
+
+	

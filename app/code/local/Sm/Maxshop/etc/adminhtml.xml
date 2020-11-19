@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+	<config>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<maxshop_cfg translate="title" module="maxshop">
+											<title>SM maxshop Section</title>
+											<sort_order>150</sort_order>
+										</maxshop_cfg>
+									</children>
+								</config>
+							</children>
+						</system>						
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<menu>
+			<maxshop translate="title" module="maxshop">
+				<title>SM Maxshop Setting</title>
+				<sort_order>100</sort_order>
+				<depends>
+					<module>Sm_Maxshop</module>
+				</depends>
+				<children>
+					<maxshop translate="title" module="maxshop">
+						<title>SM Maxshop Setting</title>
+						<action>adminhtml/system_config/edit/section/maxshop_cfg</action>
+						<sort_order>0</sort_order>
+					</maxshop>
+					
+					<basicproducts_cfg translate="title" module="maxshop">
+						<title>SM Basic Products</title>
+						<sort_order>1</sort_order>
+						<action>adminhtml/system_config/edit/section/basicproducts_cfg</action>
+					</basicproducts_cfg>	
+					
+					<searchboxpro translate="title" module="maxshop">
+						<title>SM Searchboxpro</title>
+						<sort_order>2</sort_order>
+						<action>adminhtml/system_config/edit/section/searchboxpro</action>
+					</searchboxpro>	
+							
+					<cartpro translate="title" module="maxshop">
+						<title>SM Cart Pro</title>
+						<action>adminhtml/system_config/edit/section/cartpro_cfg</action>
+						<sort_order>3</sort_order>
+					</cartpro>					
+			
+
+					<megamenu translate="title">
+						<title>SM Mega Menu</title>
+						<children>
+							<menugroup translate="title" module="maxshop">
+								<title>Menu Manager</title>
+								<action>megamenu/adminhtml_menugroup/</action>
+								<sort_order>1</sort_order>
+							</menugroup>	
+							<menuitems translate="title" module="maxshop">
+								<title>Menu Items Manager</title>
+								<action>megamenu/adminhtml_menuitems/</action>
+								<sort_order>2</sort_order>
+							</menuitems>
+							<configurtion translate="title" module="maxshop">
+								<title>Configuration</title>
+								<action>adminhtml/system_config/edit/section/megamenu_cfg</action>
+								<sort_order>3</sort_order>
+							</configurtion>
+						</children>
+					</megamenu>
+					
+					<deal_cfg translate="title" module="maxshop">
+						<title>SM Deal</title>
+						<action>adminhtml/system_config/edit/section/deal_cfg</action>
+						<sort_order>4</sort_order>
+					</deal_cfg>	
+					
+					<imageslider_cfg translate="title" module="maxshop">
+						<title>SM Image Slider</title>
+						<action>adminhtml/system_config/edit/section/imageslider_cfg</action>
+						<sort_order>5</sort_order>
+					</imageslider_cfg>	
+					
+					<supercategories_cfg translate="title" module="maxshop">
+						<title>SM Super Categories</title>
+						<action>adminhtml/system_config/edit/section/supercategories_cfg</action>
+						<sort_order>6</sort_order>
+					</supercategories_cfg>	
+
+						
+					<quickview translate="title" module="maxshop">
+						<title>SM Quickview</title>
+						<action>adminhtml/system_config/edit/section/quickview</action>
+						<sort_order>7</sort_order>
+					</quickview>
+					
+					<sm_shopby translate="title" module="maxshop">
+						<title>SM Shopby</title>
+						<action>adminhtml/system_config/edit/section/sm_shopby</action>
+						<sort_order>8</sort_order>
+					</sm_shopby>
+
+				</children>
+			</maxshop>
+		</menu>		
+	</config>

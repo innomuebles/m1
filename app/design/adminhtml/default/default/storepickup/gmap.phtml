@@ -1,0 +1,70 @@
+<!DOCTYPE html> 
+<tr>
+    <td colspan="10" width="470">
+<!-- <script src="http://maps.google.com/maps/api/js?sensor=true"></script>  -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'js/mst/storepickup/storepickup_backend.js'; ?>"></script> 
+<script>
+
+	if ( $('latitude').getValue() != '' ) {  
+		latitude_level = parseFloat($('latitude').getValue());  
+	} else {  
+	latitude_level = 39.90973623453719;
+	}
+	
+	if ( $('longitude').getValue() != '' ) {  
+		longitude_level = parseFloat($('longitude').getValue());  
+	} else {  
+	longitude_level = -99.228515625;
+	}
+	
+	if ( $('zoom_level').getValue() != '' ) {  
+		zoom_level = parseFloat($('zoom_level').getValue());  
+	} else {  
+	zoom_level = 4;
+	}
+	
+</script>
+    
+<div class="google-map" id="google-map">
+	<h3 style="margin-top: 15px;" ><?php echo $this->__('Setup Store location'); ?></h3>
+	 <?php $id = $this->getRequest()->getParam('id'); ?>
+     <input type="hidden" id="zoom_level_val" name="zoom_level_val">
+     <input type="hidden" id="store_lat_val" name="store_lat_val">
+     <input type="hidden" id="store_lon_val" name="store_lon_val">
+	 <?php if ( $id ) { ?>
+     <div id="button-reset" style="margin-top:20px; margin-bottom: -12px;"><button type="button" onclick="resetMap()"><span><?php echo $this->__('Reset Google Map')?></span></button></div>        
+     <?php } ?>
+	 <div id="notice-map"></div>        
+     <div id="googleMap" style="height: 400px;width: 700px;margin-top: 20px;border: 1px solid;"></div>
+</div>     
+
+<script>
+
+	  googleMap = new Storepickup(latitude_level, longitude_level, zoom_level);
+
+	  function resetMap(){
+          <?php $id = $this->getRequest()->getParam('id'); ?>
+          <?php if($id):?>
+		  <?php $store = Mage::getModel('storepickup/storepickup')->load($id); ?>
+          lat_old = <?php echo $store->getLatitude(); ?>;
+          lon_old = <?php echo $store->getLongitude(); ?>;                
+          zoom_old = <?php echo $store->getZoom_level();?>;
+          $('store_lat_val').value = lat_old;
+          $('latitude').value = lat_old;
+          $('store_lon_val').value = lon_old;
+          $('longitude').value = lon_old;
+          $('zoom_level_val').value = 12;
+          $('zoom_level').value = 12;
+          $('latitude').setStyle({background: '#FAE6B4'});
+          $('longitude').setStyle({background: '#FAE6B4'});
+          $('zoom_level').setStyle({background: '#FAE6B4'});
+		  
+           googleMap = new Storepickup(lat_old, lon_old, 12);
+           googleMap.initGoogleMap();
+           
+           <?php endif;  ?>
+      }             
+</script>
+    </td>
+</tr>

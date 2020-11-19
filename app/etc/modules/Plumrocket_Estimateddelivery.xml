@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Plumrocket_Estimateddelivery>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>1.6.2</version>
+      <name>Estimated Delivery Date</name>
+      <depends>
+        <Plumrocket_Base />
+	  </depends>
+    </Plumrocket_Estimateddelivery>
+  </modules>
+</config>

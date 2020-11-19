@@ -1,0 +1,56 @@
+<?php $posts = $this->getPosts(); ?>
+<?php
+	
+?>
+<div class="blog-bottom col-lg-4 col-md-4 col-sm-6">
+	<div class="block-title-bottom">
+			<h2><?php echo $this->__('News Update')?></h2>
+	</div>
+	
+		<div class="latest-blog-bottom">
+			<?php $i=0; foreach ($posts as $post): ?>
+			<div class="item-blog item">
+				<?php
+					$pattern = "/<img .+\/>/";
+					$subject = $post->getPostContent();
+					$result = preg_match( $pattern, $subject , $matches , PREG_OFFSET_CAPTURE );
+					$matched =$matches[0];
+					$first_img=$matched[0];
+				?>
+				
+				<div class="date-blog-left">
+					<?php $date_create = $post->getCreatedTime();?>
+					<div class="d-blog">
+						<?php 
+							$day_blog = date("d",strtotime($date_create));
+							echo $day_blog;
+						?>
+					</div>
+					<div class="m-blog">
+						<?php 
+							$month_blog = date("M",strtotime($date_create));
+							echo $month_blog;
+						?>	
+					</div>
+				</div>
+				
+				<div class="blog-info">
+					<div class="postTitle">
+						<h2><a title="<?php echo $post->getTitle(); ?>" href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></h2>
+					</div>
+					
+					<div class="postContent">
+						<?php $text = str_replace($first_img, '', $post->getPostContent()); 
+							$html = strip_tags($text);
+							echo substr($html,1,90);
+						?>
+					</div>
+				</div>
+			</div>
+			<?php $i++;?>
+			
+			<?php if($i==2) break;?>
+			<?php endforeach; ?>
+		</div>
+
+</div>

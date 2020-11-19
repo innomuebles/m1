@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Credix_Cpayment>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Payment />
+                <Mage_Paygate/>
+                <Mage_Sales/>
+                <Mage_Checkout/>    
+            </depends>
+        </Credix_Cpayment>
+    </modules>
+</config>

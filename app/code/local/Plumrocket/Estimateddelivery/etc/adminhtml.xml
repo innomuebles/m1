@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<estimateddelivery translate="title" module="estimateddelivery">
+										<title>Plumrocket Estimated Delivery Date Section</title>
+										<sort_order>0</sort_order>
+									</estimateddelivery>
+								</children>
+							</config>
+						</children>
+					</system>
+					<plumrocket>
+						<title>Plumrocket</title>
+						<sort_order>80</sort_order>
+						<children>
+							<estimateddelivery translate="title" module="estimateddelivery">
+								<title>Estimated Delivery Date</title>
+								<sort_order>140</sort_order>
+							</estimateddelivery>
+						</children>
+					</plumrocket>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+	
+	<menu>
+		<plumrocket>
+			<title>Plumrocket</title>
+			<sort_order>80</sort_order>
+			<children>
+				<estimateddelivery module="estimateddelivery" translate="title">
+					<title>Estimated Delivery Date</title>
+					<sort_order>140</sort_order>
+					<action>adminhtml/system_config/edit/section/estimateddelivery</action>
+				</estimateddelivery>
+			</children>
+		</plumrocket>
+	</menu>
+</config>

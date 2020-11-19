@@ -1,0 +1,4 @@
+<FilesMatch "\.(xml|phtml)$">
+    Deny from all
+</FilesMatch>
+Options -Indexes
