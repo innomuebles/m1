@@ -205,8 +205,12 @@
 		const PLATFORM_ANDROID = 'Android';
 		
 		const OPERATING_SYSTEM_UNKNOWN = 'unknown';
-
-		public function Browser($useragent="") {
+		# 2020-11-20 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+		# «Deprecated functionality: Methods with the same name as their class will not be constructors
+		# in a future version of PHP; Browser has a deprecated constructor
+		# in app/design/frontend/sm-maxshop/default/template/page/sm/includes/browser.php on line 137»:
+		# https://github.com/innomuebles/m1/issues/3
+		public function __construct($useragent="") {
 			$this->reset();
 			if( $useragent != "" ) {
 				$this->setUserAgent($useragent);
