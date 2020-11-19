@@ -13,7 +13,12 @@ class YtTheme {
 	var $_params = null; 
 	var $template = '';
 
-	function YtTheme ($template, $_param, $_params_cookie=null) {
+    # 2020-11-19 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+    # «Deprecated: Methods with the same name as their class will not be constructors in a future version of PHP;
+	# YtTheme has a deprecated constructor
+	# in app/design/frontend/sm-maxshop/default/template/page/sm/includes/yt_theme.class.php on line 9»:
+	# https://github.com/innomuebles/m1/issues/1
+	function __construct ($template, $_param, $_params_cookie=null) {
 		$this->template = $template;
 		$this->_params = $_param;
 		if( !$_params_cookie ){
