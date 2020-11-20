@@ -5,8 +5,10 @@ class Magecomp_Recaptcha_Model_Observer
     public function Customercreate($observer)
     {
         try {
-            if(Mage::app()->getRequest()->getRouteName()!="adminhtml" && Mage::app()->getRequest()->getRouteName()!= 'opc')
-            {
+			# 2020-11-20 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+			# "«Please click on the reCAPTCHA box» on adding a new address on the `customer/address/new` page":
+			# https://github.com/innomuebles/m1/issues/5
+            if (!in_array(Mage::app()->getRequest()->getRouteName(), ['adminhtml', 'customer', 'opc'])) {
                 if (Mage::helper('recaptcha/data')->showOnRegister()) {
                     $g_response = Mage::app()->getRequest()->getParam('g-recaptcha-response');
                     if (isset($g_response) && !empty($g_response)):
