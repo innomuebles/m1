@@ -205,7 +205,7 @@
 		const PLATFORM_ANDROID = 'Android';
 		
 		const OPERATING_SYSTEM_UNKNOWN = 'unknown';
-		# 2020-11-20 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+		# 2020-11-20 Dmitry Fedyuk https://github.com/dmitrii-fediuk
 		# «Deprecated functionality: Methods with the same name as their class will not be constructors
 		# in a future version of PHP; Browser has a deprecated constructor
 		# in app/design/frontend/sm-maxshop/default/template/page/sm/includes/browser.php on line 137»:

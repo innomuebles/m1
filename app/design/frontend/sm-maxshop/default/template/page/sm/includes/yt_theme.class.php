@@ -13,7 +13,7 @@ class YtTheme {
 	var $_params = null; 
 	var $template = '';
 
-    # 2020-11-20 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+    # 2020-11-20 Dmitry Fedyuk https://github.com/dmitrii-fediuk
     # «Deprecated: Methods with the same name as their class will not be constructors in a future version of PHP;
 	# YtTheme has a deprecated constructor
 	# in app/design/frontend/sm-maxshop/default/template/page/sm/includes/yt_theme.class.php on line 9»:
@@ -240,7 +240,7 @@ class YtTheme {
 
 class ThemeParameter {
 	var $_params;
-    # 2020-11-20 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
+    # 2020-11-20 Dmitry Fedyuk https://github.com/dmitrii-fediuk
     # «Deprecated: Methods with the same name as their class will not be constructors in a future version of PHP;
 	# YtTheme has a deprecated constructor
 	# in app/design/frontend/sm-maxshop/default/template/page/sm/includes/yt_theme.class.php on line 241»:
